@@ -35,6 +35,27 @@ article {
     display: flex;
     min-height: 100vh;
 }
+
+body {width: 100%; height: 100%; overflow: hidden; transition: top 2s ease-in-out;}
+
+#frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* overflow: hidden; */
+    transition: top 2s ease-in-out;
+    top: 0px;
+}
+
+#scrollable {
+    width: 100%;
+    height: 100%;
+    /* position: absolute; */
+    /* transition: all 2s ease-out; */
+    /* top: 200vh; */
+    /* overflow: hidden; */
+}
+
 /* header */
 header {
     /* height: var(--header-height);  */
@@ -43,6 +64,11 @@ header {
     background: var(--clr-header);
     backdrop-filter: blur(10px);
     bottom: 0px;
+    z-index: 2;
+}
+
+#logo {
+    display: none;
 }
 
 header .wrap-content {
@@ -58,49 +84,22 @@ header nav {
 }
 
 header nav ul {
+    display: flex;
+    max-width: 100%;
+}
+
+header nav ul li p {
     display: none;
 }
 
-.change ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 100vw;
-    bottom: 50px;
-    left: calc(-1 * var(--outer-padding));
-    height: 100vh;
-    background: var(--clr-header);
-    z-index: 2;
-}
+/* .change ul {display: flex; flex-direction: column; justify-content: center; align-items: center; position: absolute; width: 100vw; bottom: 50px; height: 100vh; background: var(--clr-header);z-index: 2;} */
 
 /* menu icon */
-#menu {
-    display: inline-block;
-    cursor: pointer;
-    margin-top: 8px;
-}
-  
-.bars {
-    width: 25px;
-    height: 3px;
-    background: var(--clr-dark);
-    margin: 4px 0;
-    transition: 0.4s;
-}
-
-.change #bar1 {
-    -webkit-transform: rotate(-45deg) translate(-4px, 4px);
-    transform: rotate(-45deg) translate(-4px, 4px);
-}
-
+/* #menu {display: inline-block;cursor: pointer;margin-top: 8px;}
+.bars {width: 25px;height: 3px;background: var(--clr-dark);margin: 4px 0;transition: 0.4s;}
+.change #bar1 {-webkit-transform: rotate(-45deg) translate(-4px, 4px);transform: rotate(-45deg) translate(-4px, 4px);}
 .change #bar2 {opacity: 0;}
-
-.change #bar3 {
-    -webkit-transform: rotate(45deg) translate(-6px, -6px);
-    transform: rotate(45deg) translate(-6px, -6px);
-}
+.change #bar3 {-webkit-transform: rotate(45deg) translate(-6px, -6px);transform: rotate(45deg) translate(-6px, -6px);} */
 
 /* work */
 
@@ -144,19 +143,26 @@ ul#footer-nav {display: flex;} */
     /* header */
     header {
         bottom: initial;
+        display: fixed;
+    }
+
+    #logo {
+        display: initial;
     }
 
     header nav ul {
         display: flex;
     }
 
-    header.change ul {
-        flex-direction: row;
-        position: initial;
-        width: initial;
-        height: auto;
-        background: none;
+    header nav ul li a i {
+        display: none !important;
     }
+
+    header nav ul li p {
+        display: initial;
+    }
+
+    /* header.change ul {flex-direction: row;position: initial;width: initial;height: auto;background: none;} */
 
     #menu {
         display: none;
