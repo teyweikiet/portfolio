@@ -17,11 +17,15 @@ let yPos = 0,
   frame = document.querySelector("#frame"),
   scrollable = document.querySelector("#scrollable");
 
-document.addEventListener("wheel", (e) => {
+document.addEventListener("scroll", (e) => {
+  let y = window.scrollY;
+  frame.style.overflow = 'hidden';
   if (!isAnimating) {
-    if (e.deltaY > 0) {
+    if (y > 0) {
+      console.log('scroll');
       customScroll(1);
-    } else if (e.deltaY < 0) {
+    } else if (y < 0) {
+      console.log('scroll');
       customScroll(-1);
     }
   }
@@ -49,6 +53,11 @@ let customScroll = (dir) => {
 };
 
 scrollable.addEventListener("transitionend", () => {
-  console.log("ended");
-  isAnimating = false;
+  setTimeout(() => {
+    isAnimating = false;
+  }, 250);
 });
+
+let scrollToId = () => {
+  document.getElementById('about').scrollIntoView();
+}
