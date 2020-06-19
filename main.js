@@ -20,11 +20,13 @@ let yPos = 0,
 document.addEventListener("scroll", (e) => {
   let y = window.scrollY;
   frame.style.overflow = 'hidden';
+
+  // TODO: logic to detect scroll up or down
   if (!isAnimating) {
-    if (y > 0) {
+    if (y > yPos) {
       console.log('scroll');
       customScroll(1);
-    } else if (y < 0) {
+    } else if (y < yPos) {
       console.log('scroll');
       customScroll(-1);
     }
@@ -54,10 +56,9 @@ let customScroll = (dir) => {
 
 scrollable.addEventListener("transitionend", () => {
   setTimeout(() => {
+    frame.style.overflow = 'initial';
     isAnimating = false;
   }, 250);
 });
 
-let scrollToId = () => {
-  document.getElementById('about').scrollIntoView();
-}
+// let scrollToId = () => {document.getElementById('about').scrollIntoView();}
