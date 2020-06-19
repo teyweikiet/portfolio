@@ -7,6 +7,7 @@
     --clr-dark: #25274D;
     --clr-light: #AAABB8;
     --clr-header: rgba(256,256,256, 0.8);
+    --clr-hover: navy;
 
     --outer-padding: 1em;
     --header-height: 42px + 2 * var(--outer-padding) + 1px;
@@ -51,6 +52,7 @@ article {
     width: 100vw;
     top: 0px;
     transition: top 2s ease-in-out;
+    scroll-behavior: smooth;
 }
 
 /* header */
@@ -90,6 +92,15 @@ header nav ul li p {
     display: none;
 }
 
+header nav li {
+    transition: all 1s;
+}
+
+header nav li:hover {
+    color: var(--clr-hover);
+    transform: translate3d(0, 0, 10px) scale(1.05);
+    text-shadow: 2px 2px 3px rgb(128, 128, 128, 0.5);
+}
 /* .change ul {display: flex; flex-direction: column; justify-content: center; align-items: center; position: absolute; width: 100vw; bottom: 50px; height: 100vh; background: var(--clr-header);z-index: 2;} */
 
 /* menu icon */
