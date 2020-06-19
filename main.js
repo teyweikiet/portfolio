@@ -17,14 +17,12 @@ let yPos = 0,
   frame = document.querySelector("#frame"),
   scrollable = document.querySelector("#scrollable");
 
-document.addEventListener("scroll", (e) => {
-  let y = window.scrollY;
+document.addEventListener("wheel", (e) => {
   frame.style.overflow = 'hidden';
   if (!isAnimating) {
-    if (y > 0) {
-      console.log('scroll');
+    if (e.deltaY > 0) {
       customScroll(1);
-    } else if (y < 0) {
+    } else if (e.deltaY < 0) {
       console.log('scroll');
       customScroll(-1);
     }
