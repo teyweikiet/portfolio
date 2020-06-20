@@ -1,15 +1,15 @@
 // let scrollY = 0,
 let body = document.querySelector("body");
-    // scrollable = document.querySelector('#scrollable'),
-    // isAnimating = false;
-    // isWheeling = False,
-    
+// scrollable = document.querySelector('#scrollable'),
+// isAnimating = false;
+// isWheeling = False,
+
 // frame = document.getElementById("frame");
 
 // toggleMenu = (btn) => {document.querySelector('header').classList.toggle('change');}
 
 toggleTheme = () => {
-    body.classList.toggle('dark');
+  body.classList.toggle('dark');
 }
 
 let yPos = 0,
@@ -17,24 +17,85 @@ let yPos = 0,
   frame = document.querySelector("#frame"),
   scrollable = document.querySelector("#scrollable");
 
-document.addEventListener("wheel", (e) => {
-  frame.style.overflow = 'hidden';
+
+scrollable.addEventListener("wheel", (e) => {
   if (!isAnimating) {
     if (e.deltaY > 0) {
-      customScroll(1);
+      customScroll('up');
     } else if (e.deltaY < 0) {
-      console.log('scroll');
-      customScroll(-1);
+      customScroll('down');
     }
   }
 });
 
+let swipeDir,
+  //startX,
+  startY,
+  //distX,
+  distY,
+  threshold = 0, //150, // required min distance traveled to be considered swipe
+  //restraint = 100, // max dist allowed at the same time in perpendicular
+  allowedTime = 500, //200, // max time allowed to travel that distance
+  elapsedTime,
+  startTime;
+
+scrollable.addEventListener("touchstart", (e) => {
+  let touchObj  = e.changedTouches[0];
+  swipeDir = 'none';
+  //distX = 0;
+  distY = 0;
+  //startX = touchObj.pageX;
+  startY = touchObj.pageY;
+  startTime = new Date().getTime(); 
+  e.preventDefault();
+});
+
+scrollable.addEventListener("touchmove", (e) => {
+  e.preventDefault(); //prevent scrolling when inside DIV
+});
+
+scrollable.addEventListener("touchend", (e) => {
+  var touchObj = e.changedTouches[0];
+  //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
+  distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
+  elapsedTime = new Date().getTime() - startTime; //get time elapsed
+  if (elapsedTime <= allowedTime) {
+    // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+    //   swipeDir = (distX < 0) ? 'left': 'right'; 
+    // } else 
+    if (Math.abs(distY) >= threshold ) {// && Math.abs(distX) <= restraint) {
+      swipeDir = (distY < 0) ? 'up': 'down';
+      console.log('swipeDir');
+    }
+  }
+  e.preventDefault();
+  console.log('touchend', swipeDir, distY);
+  customScroll(swipeDir);
+});
+
+
+// document.addEventListener("scroll", (e) => {
+//   let y = window.scrollY;
+//   frame.style.overflow = 'hidden';
+
+//   // TODO: logic to detect scroll up or down
+//   if (!isAnimating) {
+//     if (y > yPos) {
+//       console.log('scroll');
+//       customScroll(1);
+//     } else if (y < yPos) {
+//       console.log('scroll');
+//       customScroll(-1);
+//     }
+//   }
+// });
+
 let customScroll = (dir) => {
   isAnimating = true;
 
-  if (dir == 1) {
+  if (dir == 'up') {
     yPos -= 100;
-  } else {
+  } else if (dir == 'down') {
     yPos += 100;
   }
 
@@ -52,10 +113,9 @@ let customScroll = (dir) => {
 
 scrollable.addEventListener("transitionend", () => {
   setTimeout(() => {
+    // frame.style.overflow = 'initial';
     isAnimating = false;
   }, 250);
 });
 
-let scrollToId = () => {
-  document.getElementById('about').scrollIntoView();
-}
+// let scrollToId = () => {document.getElementById('about').scrollIntoView();}
