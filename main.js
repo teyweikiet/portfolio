@@ -1,5 +1,6 @@
 // let scrollY = 0,
-let body = document.querySelector("body");
+let body = document.querySelector("body"),
+    navs = document.querySelectorAll('header nav li');
 // scrollable = document.querySelector('#scrollable'),
 // isAnimating = false;
 // isWheeling = False,
@@ -33,7 +34,7 @@ let swipeDir,
   startY,
   //distX,
   distY,
-  threshold = 0, //150, // required min distance traveled to be considered swipe
+  threshold = 50, //150, // required min distance traveled to be considered swipe
   //restraint = 100, // max dist allowed at the same time in perpendicular
   allowedTime = 500, //200, // max time allowed to travel that distance
   elapsedTime,
@@ -89,6 +90,24 @@ scrollable.addEventListener("touchend", (e) => {
 //     }
 //   }
 // });
+let toggleActive = () => {
+  let c = yPos/-100;
+  document.querySelector('.active').classList.toggle('active');
+  navs[c].classList.toggle('active');
+}
+
+let customScrollTo = (pos) => {
+  isAnimating = true;
+
+  if (yPos == pos) {
+    isAnimating = false;
+    return;
+  } 
+
+  yPos = pos;
+  toggleActive();
+  scrollable.style.top = yPos + "vh";
+}
 
 let customScroll = (dir) => {
   isAnimating = true;
@@ -108,14 +127,18 @@ let customScroll = (dir) => {
     isAnimating = false;
     return;
   }
+  toggleActive();
   scrollable.style.top = yPos + "vh";
 };
 
 scrollable.addEventListener("transitionend", () => {
   setTimeout(() => {
     // frame.style.overflow = 'initial';
+    console.log('ended')
     isAnimating = false;
   }, 250);
 });
 
 // let scrollToId = () => {document.getElementById('about').scrollIntoView();}
+
+// TODO: is it possible to just prevent default on scroll instead of using wheel & touch event?
