@@ -19,18 +19,30 @@
                 <nav>
                     <h1 id="logo" onclick="toggleTheme()">Logo</h1>
                     <ul>
-                        <li><a href="#home"><i class="fas fa-home"></i>
+                        <li onclick="customScrollTo(0)" class="active">
+                            <!-- <a href="#home"> -->
+                                <i class="fas fa-home"></i>
                                 <p>Home</p>
-                            </a></li>
-                        <li><a href="#work"><i class="fas fa-briefcase"></i>
+                            <!-- </a> -->
+                        </li>
+                        <li onclick="customScrollTo(-100)">
+                            <!-- <a href="#work"> -->
+                                <i class="fas fa-briefcase"></i>
                                 <p>Work</p>
-                            </a></li>
-                        <li><a href="#about"><i class="fas fa-user-tie"></i>
+                            <!-- </a> -->
+                        </li>
+                        <li onclick="customScrollTo(-200)">
+                            <!-- <a href="#about"> -->
+                                <i class="fas fa-user-tie"></i>
                                 <p>About</p>
-                            </a></li>
-                        <li><a href="#contact"><i class="fas fa-address-card"></i>
+                            <!-- </a> -->
+                        </li>
+                        <li onclick="customScrollTo(-300)">
+                            <!-- <a href="#contact"> -->
+                                <i class="fas fa-address-card"></i>
                                 <p>Contact</p>
-                            </a></li>
+                            <!-- </a> -->
+                        </li>
                     </ul>
 
                     <!-- <div id="menu" onclick="toggleMenu(this)">
@@ -62,7 +74,7 @@
             <article id="contact">
                 <div class="wrap-content">
                     <img src="images/undraw_contact_us_15o2.svg">
-                    
+
                     <form>
                         <h2>Get In Touch!</h2>
                         <input type="name" placeholder="Your Name" @required>
