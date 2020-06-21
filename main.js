@@ -1,16 +1,25 @@
 // let scrollY = 0,
 let body = document.querySelector("body"),
   navs = document.querySelectorAll('header nav li'),
-  span = document.querySelector('header nav span');
-// scrollable = document.querySelector('#scrollable'),
+  span = document.querySelector('header nav span'),
+  scrollable = document.querySelector('#scrollable');
 // isAnimating = false;
 // isWheeling = False,
 
 setup = () => {
   // let rect = navs[0].getBoundingClientRect();
   // console.log(rect['width']);
-  span.style.width = navs[0].offsetWidth + 'px'; //rect.width + 'px';
-  span.style.left = navs[0].offsetLeft + 'px'; //rect.left + 'px';
+  let c = scrollable.style.top / -100;
+
+  let current = navs[c];
+
+  current.classList.toggle('active');
+
+  span.style.width = current.offsetWidth + 'px'; //rect.width + 'px';
+  span.style.left = `calc(${current.offsetLeft}px + var(--outer-padding))`; //rect.left + 'px';
+
+  // span.style.width = current.offsetWidth + 'px'; //rect.width + 'px';
+  // span.style.left = current.offsetLeft + 'px'; //rect.left + 'px';
 }
 
 // frame = document.getElementById("frame");
@@ -23,8 +32,7 @@ toggleTheme = () => {
 
 let yPos = 0,
   isAnimating = false,
-  frame = document.querySelector("#frame"),
-  scrollable = document.querySelector("#scrollable");
+  frame = document.querySelector("#frame");
 
 
 scrollable.addEventListener("wheel", (e) => {
@@ -103,11 +111,13 @@ scrollable.addEventListener("touchend", (e) => {
 // });
 
 let toggleActive = () => {
-  let c = yPos / -100;
+  let c = yPos / -100,
+      current = navs[c];
+
   document.querySelector('.active').classList.toggle('active');
-  console.log(navs[c].offsetLeft)
-  span.style.left = navs[c].offsetLeft + 'px';
-  navs[c].classList.toggle('active');
+
+  span.style.left = `calc(${current.offsetLeft}px + var(--outer-padding))`
+  current.classList.toggle('active');
 }
 
 let customScrollTo = (pos) => {
