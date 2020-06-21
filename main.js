@@ -16,8 +16,8 @@ setup = () => {
   current.classList.toggle('active');
 
   span.style.width = current.offsetWidth + 'px'; //rect.width + 'px';
-  span.style.left = `calc(${current.offsetLeft}px + var(--outer-padding))`; //rect.left + 'px';
-
+  span.style.left = current.offsetLeft + 'px'; //rect.left + 'px';
+  
   // span.style.width = current.offsetWidth + 'px'; //rect.width + 'px';
   // span.style.left = current.offsetLeft + 'px'; //rect.left + 'px';
 }
@@ -116,7 +116,7 @@ let toggleActive = () => {
 
   document.querySelector('.active').classList.toggle('active');
 
-  span.style.left = `calc(${current.offsetLeft}px + var(--outer-padding))`
+  span.style.left = `${current.offsetLeft}px`;
   current.classList.toggle('active');
 }
 
@@ -165,4 +165,4 @@ scrollable.addEventListener("transitionend", () => {
 
 // let scrollToId = () => {document.getElementById('about').scrollIntoView();}
 
-// TODO: is it possible to just prevent default on scroll instead of using wheel & touch event?
+// TODO: scroll horizontally in mobile?
