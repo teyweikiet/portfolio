@@ -16,7 +16,7 @@
     <div id="frame">
         <header>
             <div class="wrap-content">
-                <h1 id="logo" onclick="toggleTheme()">Logo</h1>
+                <h1 id="logo" onclick="toggleTheme()">TWK</h1>
                 <nav>
                     <ul>
                         <li onclick="customScrollTo(0)" class="active">
@@ -79,9 +79,15 @@
 
                     <form>
                         <h2>Get In Touch!</h2>
-                        <input type="name" placeholder="Your Name" @required>
-                        <input type="email" placeholder="Your Email" @required>
-                        <textarea>Your Message</textarea>
+                        <div class="input-border">
+                            <input type="name" placeholder="Your Name" @required>
+                        </div>
+                        <div class="input-border">
+                            <input type="email" placeholder="Your Email" @required>
+                        </div>
+                        <div class="input-border">
+                            <textarea>Your Message</textarea>
+                        </div>
                         <input type="submit" value="Send Email">
                     </form>
 

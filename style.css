@@ -163,12 +163,28 @@ form {
     max-width: 100%;
 }
 
-input, textarea {
+.input-border {
     border-radius: 4%;
-    padding: 0.5em;
+    padding: 2px;
     border: 1px solid var(--clr-dark);
     background: transparent;
     color: var(--clr-dark);
+}
+
+input, textarea {
+    width: calc(100% - 4px);
+    border: none;
+}
+
+textarea {
+    outline: none;
+    overflow: auto;
+    border: none;
+}
+
+input::placeholder {
+    position: absolute;
+    top: -20px;
 }
 
 form * + * {
