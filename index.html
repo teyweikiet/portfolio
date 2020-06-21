@@ -12,12 +12,12 @@
     <title>Portfolio</title>
 </head>
 
-<body>
+<body onload="setup()" onresize="setup()">
     <div id="frame">
         <header>
             <div class="wrap-content">
+                <h1 id="logo" onclick="toggleTheme()">Logo</h1>
                 <nav>
-                    <h1 id="logo" onclick="toggleTheme()">Logo</h1>
                     <ul>
                         <li onclick="customScrollTo(0)" class="active">
                             <!-- <a href="#home"> -->
@@ -50,6 +50,8 @@
                         <div class="bars" id="bar2"></div>
                         <div class="bars" id="bar3"></div>
                     </div> -->
+
+                    <span></span>
                 </nav>
             </div>
         </header>

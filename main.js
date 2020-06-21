@@ -1,9 +1,17 @@
 // let scrollY = 0,
 let body = document.querySelector("body"),
-    navs = document.querySelectorAll('header nav li');
+  navs = document.querySelectorAll('header nav li'),
+  span = document.querySelector('header nav span');
 // scrollable = document.querySelector('#scrollable'),
 // isAnimating = false;
 // isWheeling = False,
+
+setup = () => {
+  // let rect = navs[0].getBoundingClientRect();
+  // console.log(rect['width']);
+  span.style.width = navs[0].offsetWidth + 'px'; //rect.width + 'px';
+  span.style.left = navs[0].offsetLeft + 'px'; //rect.left + 'px';
+}
 
 // frame = document.getElementById("frame");
 
@@ -41,13 +49,13 @@ let swipeDir,
   startTime;
 
 scrollable.addEventListener("touchstart", (e) => {
-  let touchObj  = e.changedTouches[0];
+  let touchObj = e.changedTouches[0];
   swipeDir = 'none';
   //distX = 0;
   distY = 0;
   //startX = touchObj.pageX;
   startY = touchObj.pageY;
-  startTime = new Date().getTime(); 
+  startTime = new Date().getTime();
   e.preventDefault();
 });
 
@@ -64,8 +72,8 @@ scrollable.addEventListener("touchend", (e) => {
     // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
     //   swipeDir = (distX < 0) ? 'left': 'right'; 
     // } else 
-    if (Math.abs(distY) >= threshold ) {// && Math.abs(distX) <= restraint) {
-      swipeDir = (distY < 0) ? 'up': 'down';
+    if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
+      swipeDir = (distY < 0) ? 'up' : 'down';
       console.log('swipeDir');
     }
   }
@@ -91,8 +99,10 @@ scrollable.addEventListener("touchend", (e) => {
 //   }
 // });
 let toggleActive = () => {
-  let c = yPos/-100;
+  let c = yPos / -100;
   document.querySelector('.active').classList.toggle('active');
+  console.log(navs[c].offsetLeft)
+  span.style.left = navs[c].offsetLeft + 'px';
   navs[c].classList.toggle('active');
 }
 
@@ -102,7 +112,7 @@ let customScrollTo = (pos) => {
   if (yPos == pos) {
     isAnimating = false;
     return;
-  } 
+  }
 
   yPos = pos;
   toggleActive();
@@ -136,7 +146,7 @@ scrollable.addEventListener("transitionend", () => {
     // frame.style.overflow = 'initial';
     console.log('ended')
     isAnimating = false;
-  }, 250);
+  }, 300);
 });
 
 // let scrollToId = () => {document.getElementById('about').scrollIntoView();}
