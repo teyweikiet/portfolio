@@ -13,7 +13,7 @@ html {scroll-behavior: smooth;}
     --clr-hover: navy;
 
     --outer-padding: 1em;
-    --header-height: 42px + 2 * var(--outer-padding) + 1px;
+    --header-height: 76px;
 
     --article-height: 100vh;
     
@@ -43,6 +43,8 @@ i {font-size: 1.5em}
 article {
     display: flex;
     height: 100vh;
+    box-sizing: border-box;
+    padding-bottom: var(--header-height);
 }
 
 /* body {width: 100%; height: 100%; overflow: hidden; transition: top 2s ease-in-out;} */
@@ -63,7 +65,7 @@ article {
 
 /* header */
 header {
-    /* height: var(--header-height);  */
+    height: var(--header-height); 
     position: fixed;
     width: 100vw;
     background: var(--clr-header);
@@ -213,6 +215,11 @@ ul#footer-nav {display: flex;} */
 
 /* mediaquery */
 @media (min-width: 600px) {
+    article {
+        padding-bottom: initial;
+        padding-top: var(--header-height);
+    }
+
     /* header */
     header {
         bottom: initial;
