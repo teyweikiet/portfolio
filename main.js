@@ -56,7 +56,7 @@ scrollable.addEventListener("touchstart", (e) => {
   //startX = touchObj.pageX;
   startY = touchObj.pageY;
   startTime = new Date().getTime();
-  e.preventDefault();
+  // e.preventDefault();
 });
 
 scrollable.addEventListener("touchmove", (e) => {
@@ -77,27 +77,31 @@ scrollable.addEventListener("touchend", (e) => {
       console.log('swipeDir');
     }
   }
-  e.preventDefault();
+  // e.preventDefault();
   console.log('touchend', swipeDir, distY);
   customScroll(swipeDir);
 });
 
 
 // document.addEventListener("scroll", (e) => {
-//   let y = window.scrollY;
-//   frame.style.overflow = 'hidden';
+//   // e.preventDefault() won't stop page from scrolling
+//   e.preventDefault();
+  
+//   // let y = window.scrollY;
+//   // frame.style.overflow = 'hidden';
 
-//   // TODO: logic to detect scroll up or down
-//   if (!isAnimating) {
-//     if (y > yPos) {
-//       console.log('scroll');
-//       customScroll(1);
-//     } else if (y < yPos) {
-//       console.log('scroll');
-//       customScroll(-1);
-//     }
-//   }
+//   // // TODO: logic to detect scroll up or down
+//   // if (!isAnimating) {
+//   //   if (y > yPos) {
+//   //     console.log('scroll');
+//   //     customScroll(1);
+//   //   } else if (y < yPos) {
+//   //     console.log('scroll');
+//   //     customScroll(-1);
+//   //   }
+//   // }
 // });
+
 let toggleActive = () => {
   let c = yPos / -100;
   document.querySelector('.active').classList.toggle('active');
