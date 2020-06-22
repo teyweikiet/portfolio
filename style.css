@@ -1,4 +1,4 @@
-/* div {border: 1px solid;} */
+/* * {border: 1px solid;} */
 
 /* #frame > * {height: 200px;} */
 
@@ -7,24 +7,29 @@ html {scroll-behavior: smooth;}
 #frame > *:nth-child(odd):not(header) {background: var(--clr-light)}
 
 :root {
-    --clr-dark: #25274D;
-    --clr-light: #AAABB8;
+    --clr-dark: black; /* #25274D; */
+    --clr-light: white; /* #AAABB8; */
     --clr-header: rgba(256,256,256, 0.8);
-    --clr-hover: navy;
+    --clr-hover: black;
 
     --outer-padding: 1em;
-    --header-height: 76px;
+    --header-height: 70px;
 
     --article-height: 100vh;
     
     --transition-duration: 1.5s;
+
+    --font-serif: 'Merriweather', serif;
+    --font-sans: 'Open Sans', sans-serif;
 }
 
-*:not(h2) {margin: 0; padding: 0; font-family: 'Corben', cursive;}
+*:not(h2) {margin: 0; padding: 0; font-family: var(--font-serif);}
 
 ul {list-style-type: none;}
 
 a {text-decoration: none; color: var(--clr-dark);}
+
+a:hover {cursor: pointer;}
 
 img {max-width: 100%; max-height: calc(100vh - 2 * var(--header-height)); margin: auto;}
 
@@ -38,6 +43,7 @@ i {font-size: 1.5em}
     margin: auto;
     padding: var(--outer-padding);
     box-sizing: border-box;
+    /* text-align: center; */
 }
 
 article {
@@ -79,12 +85,18 @@ header {
 
 header .wrap-content {
     padding: 0.5em 1em;
+    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #logo {
     display: none;
+    z-index: 4;
+    font-weight: 900;
+    font-size: 1.4em;
+    font-family: var(--font-sans);
 }
 
 #logo:hover {
@@ -104,7 +116,7 @@ header nav ul {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    min-height: 60px;
+    /* min-height: 60px; */
     align-items: center;
 }
 
@@ -119,7 +131,11 @@ header nav li {
 }
 
 header nav ul li p {
+    font-family: var(--font-sans);
+    font-size: 1.2em;
+    font-weight: 900;
     display: none;
+
 }
 
 header nav li:hover {
@@ -127,9 +143,14 @@ header nav li:hover {
 }
 
 header nav li.active {
-    color: var(--clr-hover);
+    /* color: var(--clr-hover); */
     transform: translate3d(0, 0, 10px);
-    text-shadow: 2px 2px 3px rgb(128, 128, 128, 0.5);
+    /* text-shadow: 2px 2px 3px rgb(128, 128, 128, 0.5); */
+}
+
+.active p {
+    border-bottom: 2px solid;
+    padding-bottom: -2px;
 }
 
 header nav i {text-align: center;}
@@ -155,12 +176,69 @@ header nav span {
 
 /* home */
 #home {
-    text-align: center;
+    text-align: left;
+}
+
+#home .wrap-content {
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+#home p {
+    font-size: calc(1em + 1vw);
+}
+
+#home h1 {
+    width: 100px;
+    font-size: calc(2em + 5vw);
+}
+
+.horizontal-line {
+    height: 5px;
+    width: calc(9em + 22.5vw);
+    background: var(--clr-dark);
 }
 
 /* work */
+#work .wrap-content {
+    height: calc(100% - 2 * var(--header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.work-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.work-card img {
+    width: 30%;
+}
+
+.work-card-text {
+    width: 60%;
+}
+
+.work-card-text-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.work-card-text p {
+    display: none;
+}
 
 /* about */
+#about .wrap-content {
+    text-align: center;
+}
 
 /* contact */
 form {
@@ -172,6 +250,8 @@ form {
 }
 
 form h3 {margin: 0.5em;}
+
+.form-control:focus {border-color: var(--clr-dark); box-shadow: none;}
 
 /* form * + * {margin-top: 0.5em;} */
 
@@ -213,7 +293,6 @@ ul#footer-nav {display: flex;} */
 
     #logo {
         display: block;
-        z-index: 4;
     }
 
     header nav {
@@ -229,18 +308,18 @@ ul#footer-nav {display: flex;} */
         display: initial;
     }
 
-    .active p {
-        border-bottom: 2px solid;
-        padding-bottom: -2px;
-    }
-
     header nav span {
-        background: initial;
+        display: none;
     }
 
     /* header.change ul {flex-direction: row;position: initial;width: initial;height: auto;background: none;} */
 
     /* #menu {display: none;} */
+
+    /* work */
+    .work-card-text p {
+        display: initial;
+    }
 
     /* contact */
     #contact .wrap-content {
@@ -276,3 +355,4 @@ ul#footer-nav {display: flex;} */
 .dark a {color: var(--clr-light);}
 .dark .change ul {background: var(--clr-dark);}
 .dark input, textarea {border: 1px solid var(--clr-light); color: var(--clr-light)}
+.form-control:focus {border-color: var(--clr-light); box-shadow: none;}

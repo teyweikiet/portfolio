@@ -50,7 +50,7 @@ let swipeDir,
   startY,
   //distX,
   distY,
-  threshold = 50, //150, // required min distance traveled to be considered swipe
+  threshold = 100, //150, // required min distance traveled to be considered swipe
   //restraint = 100, // max dist allowed at the same time in perpendicular
   allowedTime = 500, //200, // max time allowed to travel that distance
   elapsedTime,
@@ -160,7 +160,7 @@ scrollable.addEventListener("transitionend", () => {
     // frame.style.overflow = 'initial';
     console.log('ended')
     isAnimating = false;
-  }, 300);
+  }, 500);
 });
 
 // let scrollToId = () => {document.getElementById('about').scrollIntoView();}

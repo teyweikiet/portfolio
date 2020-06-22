@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Corben&display=swap" rel="stylesheet" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet"
+        crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" rel="stylesheet"
         crossorigin="anonymous">
     <!-- CSS only -->
@@ -31,7 +35,7 @@
     <div id="frame">
         <header>
             <div class="wrap-content">
-                <h1 id="logo" onclick="toggleTheme()">TWK</h1>
+                <p id="logo" onclick="toggleTheme()">&lt;/&gt; TWK</p>
                 <nav>
                     <ul>
                         <li onclick="customScrollTo(0)">
@@ -73,18 +77,55 @@
         <div id="scrollable">
             <article id="home">
                 <div class="wrap-content">
-                    <h1>Welcome to my portfolio</h1>
+                    <p>Welcome to</p>
+                    <h1>My Portfolio</h1>
+                    <div class="horizontal-line"></div>
                 </div>
             </article>
             <article id="work">
                 <div class="wrap-content">
-                    <img src="images/undraw_online_cv_qy9w.svg">
+                    <h2>Work</h2>
+                    <div class="work-card">
+                        <img src="images/undraw_online_cv_qy9w.svg">
+                        <div class="work-card-text">
+                            <div class="work-card-text-main">
+                                <h3>Dose Calculator</h3>
+                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app"><i class="fas fa-link"></i></a>
+                            </div>
+                            <p>An android app built with flutter.</p>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <img src="images/undraw_online_cv_qy9w.svg">
+                        <div class="work-card-text">
+                            <div class="work-card-text-main">
+                                <h3>Markdown Previewer</h3>
+                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app"><i class="fas fa-link"></i></a>
+                            </div>
+                            <p>A web app that let you preview markdown.</p>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <img src="images/undraw_online_cv_qy9w.svg">
+                        <div class="work-card-text">
+                            <div class="work-card-text-main">
+                                <h3>Data Visualization Collection</h3>
+                                <a href="https://codepen.io/tv/DEEaGN"><i class="fas fa-link"></i></a>
+                            </div>
+                            <p>Data visualization with D3.js.</p>
+                        </div>
+                    </div>
+
                 </div>
             </article>
 
             <article id="about">
                 <div class="wrap-content">
+                    <h2>About</h2>
                     <img src="images/undraw_about_me_wa29.svg">
+                    <p>I'm a software engineer and pharmacist.</p>
                 </div>
             </article>
 
@@ -106,10 +147,11 @@
 
                         <div class="form-group">
                             <!-- <label for="message">Your Message</label> -->
-                            <textarea class="form-control" id="message" rows="2" placeholder="Your message" required></textarea>
+                            <textarea class="form-control" id="message" rows="2" placeholder="Your message"
+                                required></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Send</button>
+                        <button type="submit" class="btn btn-dark">Send</button>
                     </form>
 
                     <ul id="social-media">
