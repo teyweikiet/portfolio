@@ -1,40 +1,21 @@
-// let scrollY = 0,
 let body = document.querySelector("body"),
+  frame = document.querySelector("#frame"),
   navs = document.querySelectorAll('header nav li'),
   span = document.querySelector('header nav span'),
-  scrollable = document.querySelector('#scrollable');
-// isAnimating = false;
-// isWheeling = False,
+  scrollable = document.querySelector('#scrollable'),
+  message = document.getElementById("message"),
+  yPos = 0,
+  isAnimating = false;
 
 setup = () => {
-  // let rect = navs[0].getBoundingClientRect();
-  // console.log(rect['width']);
-  let c = scrollable.style.top / -100;
-
-  let current = navs[c];
+  let c = scrollable.style.top / -100,
+      current = navs[c];
 
   current.classList.toggle('active');
 
-  span.style.width = current.offsetWidth + 'px'; //rect.width + 'px';
-  span.style.left = current.offsetLeft + 'px'; //rect.left + 'px';
-  
-  // span.style.width = current.offsetWidth + 'px'; //rect.width + 'px';
-  // span.style.left = current.offsetLeft + 'px'; //rect.left + 'px';
+  span.style.width = current.offsetWidth + 'px';
+  span.style.left = current.offsetLeft + 'px';
 }
-
-// frame = document.getElementById("frame");
-
-// toggleMenu = (btn) => {document.querySelector('header').classList.toggle('change');}
-
-toggleTheme = () => {
-  // body.classList.toggle('dark');
-  return;
-}
-
-let yPos = 0,
-  isAnimating = false,
-  frame = document.querySelector("#frame");
-
 
 scrollable.addEventListener("wheel", (e) => {
   if (!isAnimating) {
@@ -91,29 +72,9 @@ scrollable.addEventListener("touchend", (e) => {
   customScroll(swipeDir);
 });
 
-
-// document.addEventListener("scroll", (e) => {
-//   // e.preventDefault() won't stop page from scrolling
-//   e.preventDefault();
-  
-//   // let y = window.scrollY;
-//   // frame.style.overflow = 'hidden';
-
-//   // // TODO: logic to detect scroll up or down
-//   // if (!isAnimating) {
-//   //   if (y > yPos) {
-//   //     console.log('scroll');
-//   //     customScroll(1);
-//   //   } else if (y < yPos) {
-//   //     console.log('scroll');
-//   //     customScroll(-1);
-//   //   }
-//   // }
-// });
-
 let toggleActive = () => {
   let c = yPos / -100,
-      current = navs[c];
+    current = navs[c];
 
   document.querySelector('.active').classList.toggle('active');
 
@@ -158,14 +119,12 @@ let customScroll = (dir) => {
 
 scrollable.addEventListener("transitionend", () => {
   setTimeout(() => {
-    // frame.style.overflow = 'initial';
     console.log('ended')
     isAnimating = false;
   }, 500);
 });
 
-let message = document.getElementById("message");
-
+// Form validation
 message.addEventListener("focusout", () => {
   if (message.innerHTML == '') {
     message.classList.add('invalid');
@@ -183,6 +142,10 @@ document.querySelector('form').addEventListener('submit', (e) => {
   }
 })
 
-// let scrollToId = () => {document.getElementById('about').scrollIntoView();}
+// Toggle theme
+toggleTheme = () => {
+  // body.classList.toggle('dark');
+  return;
+}
 
 // TODO: scroll horizontally in mobile?
