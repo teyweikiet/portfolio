@@ -27,7 +27,8 @@ setup = () => {
 // toggleMenu = (btn) => {document.querySelector('header').classList.toggle('change');}
 
 toggleTheme = () => {
-  body.classList.toggle('dark');
+  // body.classList.toggle('dark');
+  return;
 }
 
 let yPos = 0,
@@ -50,7 +51,7 @@ let swipeDir,
   startY,
   //distX,
   distY,
-  threshold = 100, //150, // required min distance traveled to be considered swipe
+  threshold = 50, //150, // required min distance traveled to be considered swipe
   //restraint = 100, // max dist allowed at the same time in perpendicular
   allowedTime = 500, //200, // max time allowed to travel that distance
   elapsedTime,
@@ -162,6 +163,25 @@ scrollable.addEventListener("transitionend", () => {
     isAnimating = false;
   }, 500);
 });
+
+let message = document.getElementById("message");
+
+message.addEventListener("focusout", () => {
+  if (message.innerHTML == '') {
+    message.classList.add('invalid');
+    console.log('invalid');
+  } else {
+    message.classList.remove('invalid');
+    console.log('valid');
+  }
+})
+
+document.querySelector('form').addEventListener('submit', (e) => {
+  if (document.querySelector('.invalid')) {
+    console.log('invalid');
+    e.preventDefault();
+  }
+})
 
 // let scrollToId = () => {document.getElementById('about').scrollIntoView();}
 

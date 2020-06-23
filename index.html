@@ -12,8 +12,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" rel="stylesheet"
         crossorigin="anonymous">
     <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
 
     <!-- JS, Popper.js, and jQuery -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -83,6 +83,7 @@
                 </div>
             </article>
             <article id="work">
+                
                 <div class="wrap-content">
                     <h2>Work</h2>
                     <div class="work-card">
@@ -90,7 +91,8 @@
                         <div class="work-card-text">
                             <div class="work-card-text-main">
                                 <h3>Dose Calculator</h3>
-                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app"><i class="fas fa-link"></i></a>
+                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app" target="_blank"><i
+                                        class="fas fa-link"></i></a>
                             </div>
                             <p>An android app built with flutter.</p>
                         </div>
@@ -101,7 +103,8 @@
                         <div class="work-card-text">
                             <div class="work-card-text-main">
                                 <h3>Markdown Previewer</h3>
-                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app"><i class="fas fa-link"></i></a>
+                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app" target="_blank"><i
+                                        class="fas fa-link"></i></a>
                             </div>
                             <p>A web app that let you preview markdown.</p>
                         </div>
@@ -112,7 +115,7 @@
                         <div class="work-card-text">
                             <div class="work-card-text-main">
                                 <h3>Data Visualization Collection</h3>
-                                <a href="https://codepen.io/tv/DEEaGN"><i class="fas fa-link"></i></a>
+                                <a href="https://codepen.io/tv/DEEaGN" target="_blank"><i class="fas fa-link"></i></a>
                             </div>
                             <p>Data visualization with D3.js.</p>
                         </div>
@@ -131,27 +134,50 @@
 
             <article id="contact">
                 <div class="wrap-content">
-                    <img src="images/undraw_contact_us_15o2.svg">
+                    <!-- <img src="images/undraw_contact_us_15o2.svg"> -->
 
-                    <form>
+                    <!-- <form>
                         <h3>Get in touch!</h3>
                         <div class="form-group">
-                            <!-- <label for="name">Name</label> -->
                             <input type="name" class="form-control" id="name" placeholder="Your name" required>
                         </div>
 
                         <div class="form-group">
-                            <!-- <label for="email">Email address</label> -->
                             <input type="email" class="form-control" id="email" placeholder="Your email" required>
                         </div>
 
                         <div class="form-group">
-                            <!-- <label for="message">Your Message</label> -->
                             <textarea class="form-control" id="message" rows="2" placeholder="Your message"
                                 required></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-dark">Send</button>
+                    </form> -->
+                    <form>
+                        <h2>Get in touch!</h2>
+                        <div>Hi, my name is
+                            <div class="custom-input">
+                                <input type="name" class="inputText" required />
+                                <span class="floating-label">your name</span>
+                            </div>
+                            and I can be reached via
+                            <div class="custom-input">
+                                <input type="email" class="inputText" required />
+                                <span class="floating-label">your email</span>
+                            </div></input>
+                            and
+                            <div class="custom-input">
+                                <input type="tel" class="inputText" required />
+                                <span class="floating-label">your phone name</span>
+                            </div>
+                            so that we can discuss about 
+                            <div class="custom-input custom-input-expandable">
+                                <div id="message" onwheel="event.stopPropagation()" ontouch role="text" contenteditable="true" class="inputText invalid" aria-required="true"></div>
+                                <span class="floating-label">your message</span>
+                            </div>
+                            <br>
+                            <input id="send" type="submit" value="Send"></input>
+                        </div>
                     </form>
 
                     <ul id="social-media">

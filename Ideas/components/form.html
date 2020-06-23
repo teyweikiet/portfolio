@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        :root {
+            --input-padding: 0.5em;
+        }
+
+        * {border: 1px solid;}
+
+        /* #form {position: static;} */
+
+        #form > div > * {
+            margin: var(--input-padding) 0;
+        }
+
+        .custom-input {
+            display: inline-block;
+            position: relative;
+        }
+
+        .inputText {
+            /* position: absolute; */
+            padding: var(--input-padding);
+            background: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 1px dashed;
+            padding-bottom: calc(0.6 * var(--input-padding));
+        }
+
+        .floating-label {
+            position: absolute;
+            left: var(--input-padding);
+            top: calc(0.5 * var(--input-padding));
+            pointer-events: none;
+            transition: 0.2s ease all;
+            opacity: 0.6;
+        }
+
+        input:focus~.floating-label,
+        input:not(:focus):valid~.floating-label {
+            top: calc(-1.5 * var(--input-padding));
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+
+        #test {
+            /* min-height: 29px; */
+            min-width: 175px;
+            max-width: calc(100vw - 2 * var(--input-padding));
+            /* border-bottom: 1px solid; */
+        }
+
+        #test:focus~.floating-label,
+        #test:not(:focus):valid~.floating-label {
+            top: calc(-1.5 * var(--input-padding));
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="form">
+        <h2>Get in touch!</h2>
+        <div>Hi, my name is
+            <div class="custom-input">
+                <input type="name" class="inputText" required/>
+                <span class="floating-label">your name</span>
+            </div>
+            and I can be reached via
+            <div class="custom-input">
+                <input type="email" class="inputText" required/>
+                <span class="floating-label">your email</span>
+            </div></input>
+            and
+            <div class="custom-input">
+                <input type="tel" class="inputText" required/>
+                <span class="floating-label">your phone name</span>
+            </div>
+            so that we can discuss about
+            <div class="custom-input">
+                <input type="text" class="inputText" role="textbox" aria-multiline="true" required/>
+                <span class="floating-label">your message</span>
+            </div>
+
+            <br>
+
+            discuss about 
+            <div class="custom-input">
+                <div id="test" role="text" contenteditable="true" class="inputText" tabindex="0" aria-required="true" aria-invalid="false"></div>
+                <span class="floating-label">your message</span>
+            </div>
+            <div class="custom-input">
+                <input type="text" class="inputText" role="textbox" aria-multiline="true" required/>
+                <span class="floating-label">your message</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
