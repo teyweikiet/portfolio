@@ -225,7 +225,7 @@ form {
 }
 
 form > div > * {
-    margin: var(--input-padding) 0;
+    margin: var(--input-padding) 0.2em;
 }
 
 .custom-input {
@@ -241,6 +241,7 @@ form > div > * {
     outline: none;
     border-bottom: 1px dashed;
     padding-bottom: calc(0.25 * var(--input-padding));
+    font-size: 1em;
 }
 
 #message {
@@ -268,7 +269,7 @@ form > div > * {
     top: calc(1 * var(--input-padding));
 }
 
-#message ~ .floating-label {top: calc(0.8 * var(--input-padding));}
+/* #message ~ .floating-label {top: calc(0.8 * var(--input-padding));} */
 
 #message:focus~.floating-label,
 #message:not(:focus):not(.invalid)~.floating-label,
@@ -279,13 +280,15 @@ form > div > * {
     opacity: 0.8;
 }
 
-#message:focus~.floating-label,
+/* #message:focus~.floating-label,
 #message:not(:focus):not(.invalid)~.floating-label {
-    top: calc(-0.5 * var(--input-padding));
-}
+    top: calc(-1.2 * var(--input-padding));
+} */
 
 #send {
-    padding: 1em 10em;
+    box-sizing: border-box;
+    width: min(80vw, 20em);
+    height: 3em;
     border-radius: 1em;
     margin-top: 1em;
 }
