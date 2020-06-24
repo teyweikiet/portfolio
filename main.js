@@ -5,13 +5,14 @@ let body = document.body,
   scrollable = document.querySelector('#scrollable'),
   message = document.getElementById("message"),
   animation_screens = document.querySelectorAll('.animation-screen'),
+  labels = document.querySelectorAll('.floating-label'),
   yPos = 0,
   isAnimating = false;
 
 let stopTimer;
 
 let parseStyle = (style) => {
-    return style? parseInt(style.match(/-?\d+/)): 0;
+  return style ? parseInt(style.match(/-?\d+/)) : 0;
 }
 
 setup = () => {
@@ -20,7 +21,7 @@ setup = () => {
   clearTimeout(stopTimer);
 
   let c = parseStyle(scrollable.style.top) / -100,
-      current = navs[c];
+    current = navs[c];
 
   current.classList.toggle('active');
 
@@ -162,9 +163,9 @@ scrollable.addEventListener("transitionend", () => {
 });
 
 frame.addEventListener("animationend", () => {
-    animation_screens.forEach((screen) => {
-      screen.classList.remove('animate', 'reverse');
-    })
+  animation_screens.forEach((screen) => {
+    screen.classList.remove('animate', 'reverse');
+  })
 })
 
 // Form validation
@@ -184,6 +185,35 @@ document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
   }
 })
+
+// Animate input placeholder
+let typeTimer;
+
+startTyping = (node_index) => {
+  let node = labels[node_index],
+    text = labels[node_index].innerHTML,
+    c = 0,
+    l = text.length,
+    inc = +1;
+
+  typeTimer = setInterval(() => {
+
+    c += inc;
+    node.innerHTML = text.substr(0, c);
+
+    // if (c == l) c = 0;
+
+    if (c == l) stopTyping(node_index);
+    // startTyping(labels[1]);
+  }, 150)
+}
+
+stopTyping = (node_index) => {
+  clearInterval(typeTimer);
+  startTyping((node_index + 1) % 4);
+}
+
+startTyping(0);
 
 // Toggle theme
 toggleTheme = () => {
