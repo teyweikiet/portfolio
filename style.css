@@ -71,6 +71,7 @@ i {
     margin: auto;
     padding: var(--outer-padding);
     box-sizing: border-box;
+    max-height: calc(100vh - 2 * var(--header-height));
 }
 
 article {
@@ -205,7 +206,6 @@ header nav span {
 
 /* work */
 #work .wrap-content {
-    max-height: calc(100vh - 2 * var(--header-height));
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -245,6 +245,7 @@ header nav span {
 }
 
 .work-card-text p {
+    font-size: 1em;
     display: none;
 }
 
@@ -267,10 +268,11 @@ header nav span {
     width: 80vw;
     max-width: 300px;
     height: 80vw;
-    max-height: 300px;
+    max-height: min(300px, 50vh);
     border-radius: 50%;
     margin: auto;
     object-fit: cover;
+    object-position: center 40%;
 }
 
 .name {
