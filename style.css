@@ -402,6 +402,22 @@ form>div>* {
         display: none !important;
     }
 
+    header nav ul li:nth-child(1):hover ~ span {
+        left: 0px !important;
+    }
+
+    header nav ul li:nth-child(2):hover ~ span {
+        left: 100px !important;
+    }
+
+    header nav ul li:nth-child(3):hover ~ span {
+        left: 200px !important;
+    }
+
+    header nav ul li:nth-child(4):hover ~ span {
+        left: 300px !important;
+    }
+
     header nav ul li p {
         display: initial;
     }
