@@ -1,4 +1,4 @@
-let body = document.querySelector("body"),
+let body = document.body,
   frame = document.querySelector("#frame"),
   navs = document.querySelectorAll('header nav li'),
   span = document.querySelector('header nav span'),
@@ -7,14 +7,28 @@ let body = document.querySelector("body"),
   yPos = 0,
   isAnimating = false;
 
+let stopTimer;
+
+let parseStyle = (style) => {
+    return style? parseInt(style.match(/-?\d+/)): 0;
+}
+
 setup = () => {
-  let c = scrollable.style.top / -100,
+  body.classList.add('animation-stopper');
+
+  clearTimeout(stopTimer);
+
+  let c = parseStyle(scrollable.style.top) / -100,
       current = navs[c];
 
   current.classList.toggle('active');
 
   span.style.width = current.offsetWidth + 'px';
   span.style.left = current.offsetLeft + 'px';
+
+  stopTimer = setTimeout(() => {
+    body.classList.remove('animation-stopper');
+  }, 100);
 }
 
 scrollable.addEventListener("wheel", (e) => {
@@ -76,10 +90,14 @@ let toggleActive = () => {
   let c = yPos / -100,
     current = navs[c];
 
-  document.querySelector('.active').classList.toggle('active');
+  let active = document.querySelector('.active');
+
+  if (active) {
+    active.classList.remove('active');
+  }
 
   span.style.left = `${current.offsetLeft}px`;
-  current.classList.toggle('active');
+  current.classList.add('active');
 }
 
 let customScrollTo = (pos) => {
