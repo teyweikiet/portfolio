@@ -4,6 +4,7 @@ let body = document.body,
   span = document.querySelector('header nav span'),
   scrollable = document.querySelector('#scrollable'),
   message = document.getElementById("message"),
+  animation_screens = document.querySelectorAll('.animation-screen'),
   yPos = 0,
   isAnimating = false;
 
@@ -87,6 +88,7 @@ scrollable.addEventListener("touchend", (e) => {
 });
 
 let toggleActive = () => {
+
   let c = yPos / -100,
     current = navs[c];
 
@@ -100,12 +102,26 @@ let toggleActive = () => {
   current.classList.add('active');
 }
 
+let pageTransition = (toReverse) => {
+  animation_screens.forEach((screen) => {
+    if (toReverse) {
+      screen.classList.add('animate', 'reverse');
+    } else {
+      screen.classList.add('animate');
+    }
+  });
+}
+
 let customScrollTo = (pos) => {
   isAnimating = true;
 
   if (yPos == pos) {
     isAnimating = false;
     return;
+  } else if (yPos > pos) {
+    pageTransition(false);
+  } else {
+    pageTransition(true);
   }
 
   yPos = pos;
@@ -115,11 +131,13 @@ let customScrollTo = (pos) => {
 
 let customScroll = (dir) => {
   isAnimating = true;
+  let isReverse = false;
 
   if (dir == 'up') {
     yPos -= 100;
   } else if (dir == 'down') {
     yPos += 100;
+    isReverse = true;
   }
 
   if (yPos < -300) {
@@ -131,6 +149,7 @@ let customScroll = (dir) => {
     isAnimating = false;
     return;
   }
+  pageTransition(isReverse);
   toggleActive();
   scrollable.style.top = yPos + "vh";
 };
@@ -141,6 +160,12 @@ scrollable.addEventListener("transitionend", () => {
     isAnimating = false;
   }, 600);
 });
+
+frame.addEventListener("animationend", () => {
+    animation_screens.forEach((screen) => {
+      screen.classList.remove('animate', 'reverse');
+    })
+})
 
 // Form validation
 message.addEventListener("focusout", () => {
