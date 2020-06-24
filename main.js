@@ -139,7 +139,7 @@ scrollable.addEventListener("transitionend", () => {
   setTimeout(() => {
     console.log('ended')
     isAnimating = false;
-  }, 500);
+  }, 600);
 });
 
 // Form validation
