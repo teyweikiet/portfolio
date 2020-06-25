@@ -11,7 +11,7 @@ let body = document.body,
   // active page index
 
   counter = 0;
-isAnimating = false;
+  isAnimating = false;
 
 let stopTimer;
 
@@ -34,6 +34,8 @@ setup = () => {
   span.style.width = navs[1].offsetWidth + 'px';
   span.style.left = navs[1].offsetLeft + 'px';
 
+  attachListenersToArticles();
+
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');
     isAnimating = false;
@@ -51,60 +53,57 @@ let swipeDir,
   elapsedTime,
   startTime;
 
-// Add event listeners to articles
-articles.forEach((article) => {
+// Event listeneer functions 
+let onTransitionEnd = () => {
+  setTimeout(() => {
+    console.log('ended')
+    isAnimating = false;
+  }, 500);
+};
 
-  article.addEventListener("wheel", (e) => {
-    if (!isAnimating) {
-      if (e.deltaY > 0) {
-        customScroll('up');
-      } else if (e.deltaY < 0) {
-        customScroll('down');
-      }
+let onWheel = (e) => {
+  if (!isAnimating) {
+    if (e.deltaY > 0) {
+      customScroll('up');
+    } else if (e.deltaY < 0) {
+      customScroll('down');
     }
-  });
+  }
+};
 
-  article.addEventListener("touchstart", (e) => {
-    let touchObj = e.changedTouches[0];
-    swipeDir = 'none';
-    //distX = 0;
-    distY = 0;
-    //startX = touchObj.pageX;
-    startY = touchObj.pageY;
-    startTime = new Date().getTime();
-    // e.preventDefault();
-  });
+let onTouchStart = (e) => {
+  let touchObj = e.changedTouches[0];
+  swipeDir = 'none';
+  //distX = 0;
+  distY = 0;
+  //startX = touchObj.pageX;
+  startY = touchObj.pageY;
+  startTime = new Date().getTime();
+  // e.preventDefault();
+};
 
-  article.addEventListener("touchmove", (e) => {
-    e.preventDefault(); //prevent scrolling when inside DIV
-  });
-  
-  article.addEventListener("touchend", (e) => {
-    var touchObj = e.changedTouches[0];
-    //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
-    distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
-    elapsedTime = new Date().getTime() - startTime; //get time elapsed
-    if (elapsedTime <= allowedTime) {
-      // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
-      //   swipeDir = (distX < 0) ? 'left': 'right'; 
-      // } else 
-      if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
-        swipeDir = (distY < 0) ? 'up' : 'down';
-        console.log('swipeDir');
-      }
+let onTouchMove = (e) => {
+  e.preventDefault(); //prevent scrolling when inside DIV
+};
+
+let onTouchEnd = (e) => {
+  var touchObj = e.changedTouches[0];
+  //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
+  distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
+  elapsedTime = new Date().getTime() - startTime; //get time elapsed
+  if (elapsedTime <= allowedTime) {
+    // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+    //   swipeDir = (distX < 0) ? 'left': 'right'; 
+    // } else 
+    if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
+      swipeDir = (distY < 0) ? 'up' : 'down';
+      console.log('swipeDir');
     }
-    // e.preventDefault();
-    console.log('touchend', swipeDir, distY);
-    customScroll(swipeDir);
-  });
-
-  article.addEventListener("transitionend", () => {
-    setTimeout(() => {
-      console.log('ended')
-      isAnimating = false;
-    }, 500);
-  });
-});
+  }
+  // e.preventDefault();
+  console.log('touchend', swipeDir, distY);
+  customScroll(swipeDir);
+};
 
 let toggleActive = () => {
 
@@ -174,8 +173,36 @@ let customScroll = (dir) => {
   toggleActive();
 };
 
-articles.forEach((article) => {
-});
+// Add event listeners to articles
+let attachListenersToArticles = () => {
+  articles.forEach((article, index) => {
+
+    article.addEventListener("transitionend", onTransitionEnd);
+    
+    if (index == 0) return;
+  
+    article.addEventListener("wheel", onWheel);
+  
+    article.addEventListener("touchstart", onTouchStart);
+    article.addEventListener("touchmove", onTouchMove);
+    article.addEventListener("touchend", onTouchEnd);
+  });
+}
+
+let detachListenersFromArticles = () => {
+  articles.forEach((article, index) => {
+
+    article.removeEventListener("transitionend", onTransitionEnd);
+    
+    if (index == 0) return;
+  
+    article.removeEventListener("wheel", onWheel);
+  
+    article.removeEventListener("touchstart", onTouchStart);
+    article.removeEventListener("touchmove", onTouchMove);
+    article.removeEventListener("touchend", onTouchEnd);
+  });
+}
 
 // Form validation
 message.addEventListener("focusout", () => {
