@@ -1,0 +1,89 @@
+<!-- Testing articles laying one on top of another -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {margin:0; padding: 0;}
+        body {text-align: center;}
+        
+        #frame, article {
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            /* overflow: hidden; */
+        }
+
+        #frame {
+            position: relative; 
+            margin: auto; 
+            background: yellow;
+            margin-top: 200px;
+        }
+
+        article {
+            position: absolute;
+            top: 200px;
+            transition: top 2s ease-in-out;
+        }
+
+        #article1 {
+            background: lightblue;
+            top: 0px;
+            z-index: 5;
+        }
+
+        #article2 {
+            background: lightcoral;
+            top: 0px;
+            z-index: 4;
+        }
+
+        #article3 {
+            background: lightgreen;
+            top: 0px;
+            z-index: 3;
+        }
+
+        #article4 {
+            background: lightsalmon;
+            top: 0px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <header></header>
+        <article id="article1"><h1>Article 1</h1></article>
+        <article id="article2"><button>Article 2</button></article>
+        <article id="article3"><input placeholder="Article 3"></article>
+        <article id="article4"><div>Article 4</div></article>
+    </div>
+
+    <button onclick="move('down')">&lt;</button>
+    <button onclick="move('up')">&gt;</button>
+    <script>
+        let c = 0,
+            articles = document.querySelectorAll('article');
+
+        let move = (dir) => {
+            if (dir == 'up') {
+                articles[c].style.top = `-200px`;
+                c++;
+            } else if (dir == 'down') {
+                articles[--c].style.top = `0px`;     
+                // c--;       
+            }
+        }
+
+        articles.forEach((article) => {
+            article.addEventListener('transitionend', () => {
+                console.log('transitionend');
+            })
+        })
+    </script>
+</body>
+</html>

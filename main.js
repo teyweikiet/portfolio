@@ -6,7 +6,9 @@ let body = document.body,
   message = document.getElementById("message"),
   animation_screens = document.querySelectorAll('.animation-screen'),
   labels = document.querySelectorAll('.floating-label'),
+  articles = document.querySelectorAll('article'),
   yPos = 0,
+  counter = 0;
   isAnimating = false;
 
 let stopTimer;
@@ -33,14 +35,26 @@ setup = () => {
   }, 100);
 }
 
-scrollable.addEventListener("wheel", (e) => {
-  if (!isAnimating) {
-    if (e.deltaY > 0) {
-      customScroll('up');
-    } else if (e.deltaY < 0) {
-      customScroll('down');
+// scrollable.addEventListener("wheel", (e) => {
+//   if (!isAnimating) {
+//     if (e.deltaY > 0) {
+//       customScroll('up');
+//     } else if (e.deltaY < 0) {
+//       customScroll('down');
+//     }
+//   }
+// });
+
+articles.forEach((article) => {
+  article.addEventListener("wheel", (e) => {
+    if (!isAnimating) {
+      if (e.deltaY > 0) {
+        customScroll('up');
+      } else if (e.deltaY < 0) {
+        customScroll('down');
+      }
     }
-  }
+  });
 });
 
 let swipeDir,
@@ -103,15 +117,27 @@ let toggleActive = () => {
   current.classList.add('active');
 }
 
-let pageTransition = (toReverse) => {
-  animation_screens.forEach((screen) => {
-    if (toReverse) {
-      screen.classList.add('animate', 'reverse');
-    } else {
-      screen.classList.add('animate');
-    }
-  });
+let pageTransition = (dir) => {
+  console.log('pag', counter)
+  if (dir == 'up') {
+    articles[counter].style.top = `-100vh`;
+    counter++;
+  } else if (dir == 'down') {
+    articles[--counter].style.top = `0vh`;
+    // c--;       
+  }
 }
+
+// Old transition
+// let pageTransition = (toReverse) => {
+//   animation_screens.forEach((screen) => {
+//     if (toReverse) {
+//       screen.classList.add('animate', 'reverse');
+//     } else {
+//       screen.classList.add('animate');
+//     }
+//   });
+// }
 
 let customScrollTo = (pos) => {
   isAnimating = true;
@@ -127,18 +153,16 @@ let customScrollTo = (pos) => {
 
   yPos = pos;
   toggleActive();
-  scrollable.style.top = yPos + "vh";
+  // scrollable.style.top = yPos + "vh";
 }
 
 let customScroll = (dir) => {
   isAnimating = true;
-  let isReverse = false;
 
   if (dir == 'up') {
     yPos -= 100;
   } else if (dir == 'down') {
     yPos += 100;
-    isReverse = true;
   }
 
   if (yPos < -300) {
@@ -150,23 +174,48 @@ let customScroll = (dir) => {
     isAnimating = false;
     return;
   }
-  pageTransition(isReverse);
+  // pageTransition(isReverse);
+  // console.log(articles[yPos/-100]);
+  pageTransition(dir);
   toggleActive();
-  scrollable.style.top = yPos + "vh";
+  // scrollable.style.top = yPos + "vh";
 };
 
-scrollable.addEventListener("transitionend", () => {
-  setTimeout(() => {
-    console.log('ended')
-    isAnimating = false;
-  }, 600);
+articles.forEach((article) => {
+  article.addEventListener("transitionend", () => {
+    setTimeout(() => {
+      console.log('ended')
+      isAnimating = false;
+    }, 500);
+  });
 });
 
-frame.addEventListener("animationend", () => {
-  animation_screens.forEach((screen) => {
-    screen.classList.remove('animate', 'reverse');
-  })
-})
+// frame.addEventListener("animationend", () => {
+//   animation_screens.forEach((screen) => {
+//     screen.classList.remove('animate', 'reverse');
+//   })
+// })
+
+// let onReverseAnimationEnd = setTimeout(() => {
+//   document.querySelector('.reverse').classList.remove('animate', 'reverse');
+//   isAnimating = false;
+// }, 1500);
+
+// scrollable.addEventListener('animationend', () => {
+//   console.log('animateionend');
+
+//   // ON ANIMATIONEND NOT FIRED AFTER REVERSE;
+//   // articles[0].style.zIndex = -50;
+//   let reverse = document.querySelector('.reverse');
+//   console.log(document.querySelector('.reverse'));
+//   if (reverse) {
+//     reverse.classList.remove('animate', 'reverse');
+//   }
+
+//   setTimeout(() => {
+//     isAnimating = false;
+//   }, 500);
+// })
 
 // Form validation
 message.addEventListener("focusout", () => {
