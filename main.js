@@ -7,7 +7,7 @@ let body = document.body,
   // animation_screens = document.querySelectorAll('.animation-screen'),
   labels = document.querySelectorAll('.floating-label'),
   articles = document.querySelectorAll('article'),
-  yPos = 0,
+  yPos = -100,
   // active page index
 
   counter = 0;
@@ -32,20 +32,25 @@ setup = () => {
   current.classList.toggle('active');
 
   span.style.width = navs[1].offsetWidth + 'px';
-  span.style.left = navs[1].offsetLeft + 'px';
+  span.style.left = navs[yPos/-100].offsetLeft + 'px';
 
-  console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches);
-  console.log(window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
-  console.log(window.matchMedia('(min-width: 500px) and(min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
+  // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches);
+  // console.log(window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
+  // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
   // attachListenersToArticles();
-  if (window.matchMedia('(min-width: 500px) and(min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches) {
+  if (window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches) {
     body.classList.add('slideMode');
     attachListenersToArticles();
   } else {
     body.classList.remove('slideMode');
-    console.log('removed');
+    // console.log('removed');
     detachListenersFromArticles();
   }
+
+  articles[0].addEventListener('scroll', doNothing);
+  articles[0].addEventListener('wheel', doNothing);
+  articles[0].addEventListener('touchstart', doNothing);
+  // articles[0].addEventListener('touchend', doNothing);
 
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');
@@ -65,6 +70,10 @@ let swipeDir,
   startTime;
 
 // Event listeneer functions 
+let doNothing = (e) => {
+  e.preventDefault();
+}
+
 let onTransitionEnd = () => {
   setTimeout(() => {
     isAnimating = false;
@@ -115,6 +124,21 @@ let onTouchEnd = (e) => {
   customScroll(swipeDir);
 };
 
+frame.addEventListener('scroll', (e) => {
+  console.log(frame.scrollTop);
+
+  if (frame.scrollTop >= articles[3].offsetTop -100) {
+    yPos = -300;
+    toggleActive();
+  } else if (frame.scrollTop >= articles[2].offsetTop - 100) {
+    yPos = -200;
+    toggleActive();
+  } else {
+    yPos = -100;
+    toggleActive();
+  }
+});
+
 let toggleActive = () => {
 
   let c = yPos / -100,
@@ -145,7 +169,13 @@ let pageTransition = (dir, page) => {
   }
 }
 
+let ccustomScrollTo = (pos) => {
+  pageTransition('up', pos / -100);
+}
+
 let customScrollTo = (pos) => {
+  isSlideMode = document.querySelector('.slideMode') ? true: false; 
+  
   isAnimating = true;
 
   if (yPos == pos) {
@@ -155,6 +185,19 @@ let customScrollTo = (pos) => {
     pageTransition('up', pos / -100);
   } else {
     pageTransition('down', pos / -100);
+  }
+
+  if (isSlideMode) {
+    if (yPos == pos) {
+      isAnimating = false;
+      return;
+    } else if (yPos > pos) {
+      pageTransition('up', pos / -100);
+    } else {
+      pageTransition('down', pos / -100);
+    }
+  } else {
+    frame.scrollTo(0, articles[pos/-100].offsetTop);
   }
 
   yPos = pos;
