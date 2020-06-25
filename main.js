@@ -4,10 +4,12 @@ let body = document.body,
   span = document.querySelector('header nav span'),
   scrollable = document.querySelector('#scrollable'),
   message = document.getElementById("message"),
-  animation_screens = document.querySelectorAll('.animation-screen'),
+  // animation_screens = document.querySelectorAll('.animation-screen'),
   labels = document.querySelectorAll('.floating-label'),
   articles = document.querySelectorAll('article'),
   yPos = 0,
+  // active page index
+
   counter = 0;
 isAnimating = false;
 
@@ -19,19 +21,22 @@ let parseStyle = (style) => {
 
 setup = () => {
   body.classList.add('animation-stopper');
+  isAnimating = true;
 
   clearTimeout(stopTimer);
 
-  let c = parseStyle(scrollable.style.top) / -100,
-    current = navs[c];
+  // let c = parseStyle(scrollable.style.top) / -100,
+  //   current = navs[c];
+  let current = navs[counter];
 
   current.classList.toggle('active');
 
-  span.style.width = current.offsetWidth + 'px';
-  span.style.left = current.offsetLeft + 'px';
+  span.style.width = navs[1].offsetWidth + 'px';
+  span.style.left = navs[1].offsetLeft + 'px';
 
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');
+    isAnimating = false;
   }, 100);
 }
 
@@ -45,7 +50,6 @@ let swipeDir,
   allowedTime = 500, //200, // max time allowed to travel that distance
   elapsedTime,
   startTime;
-
 
 // Add event listeners to articles
 articles.forEach((article) => {
@@ -161,8 +165,8 @@ let customScroll = (dir) => {
     yPos = -300;
     isAnimating = false;
     return;
-  } else if (yPos > 0) {
-    yPos = 0;
+  } else if (yPos > -100) {
+    yPos = -100;
     isAnimating = false;
     return;
   }

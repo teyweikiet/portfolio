@@ -155,9 +155,9 @@ header nav li {
     flex: 1 1 25%;
 }
 
-/* header nav li:nth-child(1) {
+header nav li:nth-child(1) {
     display: none;
-} */
+}
 
 header nav ul li p {
     font-family: var(--font-sans);
@@ -189,7 +189,7 @@ header nav span {
 #home {
     background: var(--clr-light);
     text-align: left;
-    z-index: 5;
+    z-index: 7;
 }
 
 #home .wrap-content {
@@ -272,8 +272,8 @@ header nav span {
 }
 
 .profile-div {
-    width: 100%;
-    margin: 1em 0;
+    width: 90%;
+    margin: 1em auto;
 }
 
 .profile-div > * {
@@ -345,7 +345,7 @@ form>div>* {
 #message {
     min-width: 175px;
     word-break: break-all;
-    max-height: 6em;
+    max-height: 4em;
     overflow-y: auto;
     text-align: left;
 }
@@ -389,7 +389,7 @@ form>div>* {
 }
 
 /* mediaquery */
-@media (min-width: 600px) {
+@media only screen and (min-width: 500px), only screen and (orientation: landscape) {
     article {
         padding-top: var(--header-height);
     }
@@ -417,20 +417,16 @@ form>div>* {
         display: none !important;
     }
 
-    header nav ul li:nth-child(1):hover ~ span {
+    header nav ul li:nth-child(2):hover ~ span {
         left: 0px !important;
     }
 
-    header nav ul li:nth-child(2):hover ~ span {
+    header nav ul li:nth-child(3):hover ~ span {
         left: 100px !important;
     }
 
-    header nav ul li:nth-child(3):hover ~ span {
-        left: 200px !important;
-    }
-
     header nav ul li:nth-child(4):hover ~ span {
-        left: 300px !important;
+        left: 200px !important;
     }
 
     header nav ul li p {
@@ -488,6 +484,7 @@ form>div>* {
 
     .profile-img {
         border-radius: 0px;
+        margin-left: 0em;
     }
 
     /* contact */
@@ -500,6 +497,42 @@ form>div>* {
         padding: 2em;
     }
 
+}
+
+@media (min-width: 500px) and (max-height: 500px) {
+    h2 {display: none;}
+
+    article * {
+        transform: scale(0.9);
+        margin-top: none !important;
+    }
+
+    .wrap-content {
+        margin-top: none;
+    }
+
+    .work-card {
+        height: 50vh;
+    }
+
+    .work-card p {
+        display: none;
+    }
+
+    #message {
+        max-height: 1.2em;
+    }
+
+} 
+
+@media (max-width: 500px) and (max-aspect-ratio: 2) {
+    #scrollable, article {
+        position: initial !important;
+    }
+
+    #scrollable {
+        overflow: initial;
+    }
 }
 
 /* dark theme */
