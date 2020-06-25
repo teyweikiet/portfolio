@@ -9,9 +9,8 @@ let body = document.body,
   articles = document.querySelectorAll('article'),
   yPos = -100,
   // active page index
-
-  counter = 0;
-isAnimating = false;
+  counter = 0,
+  isAnimating = false;
 
 let stopTimer;
 
