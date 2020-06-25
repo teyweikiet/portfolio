@@ -4,7 +4,7 @@ let body = document.body,
   span = document.querySelector('header nav span'),
   scrollable = document.querySelector('#scrollable'),
   message = document.getElementById("message"),
-  // animation_screens = document.querySelectorAll('.animation-screen'),
+  inputs = document.querySelectorAll('.inputText'),
   labels = document.querySelectorAll('.floating-label'),
   articles = document.querySelectorAll('article'),
   yPos = -100,
@@ -32,7 +32,7 @@ setup = () => {
   current.classList.toggle('active');
 
   span.style.width = navs[1].offsetWidth + 'px';
-  span.style.left = navs[yPos/-100].offsetLeft + 'px';
+  span.style.left = navs[yPos / -100].offsetLeft + 'px';
 
   // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches);
   // console.log(window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
@@ -127,7 +127,7 @@ let onTouchEnd = (e) => {
 frame.addEventListener('scroll', (e) => {
   console.log(frame.scrollTop);
 
-  if (frame.scrollTop >= articles[3].offsetTop -100) {
+  if (frame.scrollTop >= articles[3].offsetTop - 100) {
     yPos = -300;
     toggleActive();
   } else if (frame.scrollTop >= articles[2].offsetTop - 100) {
@@ -174,8 +174,8 @@ let ccustomScrollTo = (pos) => {
 }
 
 let customScrollTo = (pos) => {
-  isSlideMode = document.querySelector('.slideMode') ? true: false; 
-  
+  isSlideMode = document.querySelector('.slideMode') ? true : false;
+
   isAnimating = true;
 
   if (yPos == pos) {
@@ -197,7 +197,7 @@ let customScrollTo = (pos) => {
       pageTransition('down', pos / -100);
     }
   } else {
-    frame.scrollTo(0, articles[pos/-100].offsetTop);
+    frame.scrollTo(0, articles[pos / -100].offsetTop);
   }
 
   yPos = pos;
@@ -261,19 +261,52 @@ let detachListenersFromArticles = () => {
 message.addEventListener("focusout", () => {
   if (message.innerHTML == '') {
     message.classList.add('invalid');
-    console.log('invalid');
+    // console.log('invalid');
   } else {
     message.classList.remove('invalid');
-    console.log('valid');
+    // console.log('valid');
   }
-})
+});
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyB2DxpX1mDgU5WvpP67ZOD4gdrHLC9MsCw",
+  authDomain: "portfolio-8b8a6.firebaseapp.com",
+  databaseURL: "https://portfolio-8b8a6.firebaseio.com",
+  projectId: "portfolio-8b8a6",
+  storageBucket: "portfolio-8b8a6.appspot.com",
+  messagingSenderId: "780151023748",
+  appId: "1:780151023748:web:4d7a16d40c1f63081efad1"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 document.querySelector('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+
   if (document.querySelector('.invalid')) {
     console.log('invalid');
-    e.preventDefault();
+    return;
   }
-})
+
+  firebase.database().ref().child('message').push({
+    name: inputs[0].value,
+    email: inputs[1].value,
+    phone: inputs[2].value,
+    message: inputs[3].innerHTML,
+  }, () => {
+    inputs.forEach((input, index) => {
+      if (index == 3) {
+        input.innerHTML = '';
+        input.classList.add('invalid');
+      } else {
+        input.value = '';
+      }
+    })
+  });
+
+
+});
 
 // Animate input placeholder
 let typeTimer;

@@ -11,6 +11,9 @@
         crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" rel="stylesheet"
         crossorigin="anonymous">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js"></script>
 
     <link href="style.css" rel="stylesheet">
     <script defer src="main.js"></script>
@@ -42,7 +45,7 @@
                         </li>
                         <span></span>
                     </ul>
-                    
+
                 </nav>
             </div>
         </header>
@@ -50,10 +53,11 @@
         <div id="scrollable">
             <article id="home">
                 <div class="wrap-content">
-                    
+
                     <h1>Tey Wei Kiet</h1>
                     <p>Software engineer</p>
-                    <div class="enter" onclick="ccustomScrollTo(-100); event.stopPropagation();" ontouchstart="ccustomScrollTo(-100)">enter</div>
+                    <div class="enter" onclick="ccustomScrollTo(-100); event.stopPropagation();"
+                        ontouchstart="ccustomScrollTo(-100)">enter</div>
                 </div>
             </article>
 
@@ -122,7 +126,8 @@
                                 <li><a href="https://codepen.io" target="_blank"><i class="fab fa-codepen"></i>
                                         <p>Codepen</p>
                                     </a></li>
-                                <li><a href="https://freecodecamp.com" target="_blank"><i class="fab fa-free-code-camp"></i>
+                                <li><a href="https://freecodecamp.com" target="_blank"><i
+                                            class="fab fa-free-code-camp"></i>
                                         <p>freeCodeCamp</p>
                                     </a></li>
                             </ul>

@@ -243,7 +243,7 @@ header nav span {
 
 /* work */
 #work {
-    padding: var(--header-height) 0 var(--header-height) 0;
+    padding: 2em 0 var(--header-height) 0;
     z-index: 3;
 }
 
@@ -492,6 +492,10 @@ form h2 {
     }
 
     /* work */
+    #work {
+        padding-top: var(--header-height);
+    }
+
     #work .wrap-content {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
