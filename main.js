@@ -7,6 +7,7 @@ let body = document.body,
   // animation_screens = document.querySelectorAll('.animation-screen'),
   labels = document.querySelectorAll('.floating-label'),
   articles = document.querySelectorAll('article'),
+  inputs = document.querySelectorAll('.inputText');
   yPos = -100,
   // active page index
 
@@ -266,14 +267,14 @@ message.addEventListener("focusout", () => {
     message.classList.remove('invalid');
     console.log('valid');
   }
-})
+});
 
 document.querySelector('form').addEventListener('submit', (e) => {
   if (document.querySelector('.invalid')) {
     console.log('invalid');
     e.preventDefault();
   }
-})
+});
 
 // Animate input placeholder
 let typeTimer;
