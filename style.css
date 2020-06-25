@@ -197,7 +197,8 @@ header nav span {
 /* home */
 #home {
     text-align: left;
-    z-index: 6;
+    z-index: 12
+    ;
     height: 100vh;
     max-height: none;
 
@@ -575,15 +576,17 @@ form h2 {
         display: flex;
     }
 
-    .profile-div>* {
+    .profile-div > * {
         /* margin: 1.5em; */
-        flex: 1 1 50%;
+        width: 50%;
+        /* flex: 1 1 50% !important; */
     }
 
     .profile-img {
         border-radius: 0px;
-        margin-left: 0em;
+        margin-right: 1em;
     }
+
 
     /* contact */
     #contact .wrap-content {
