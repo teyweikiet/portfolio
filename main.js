@@ -10,9 +10,8 @@ let body = document.body,
   yPos = -100,
   // active page index
   counter = 0,
-  isAnimating = false;
-
-let stopTimer;
+  isAnimating = false,
+  stopTimer = null;
 
 let parseStyle = (style) => {
   return style ? parseInt(style.match(/-?\d+/)) : 0;
