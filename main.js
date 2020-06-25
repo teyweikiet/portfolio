@@ -35,28 +35,6 @@ setup = () => {
   }, 100);
 }
 
-// scrollable.addEventListener("wheel", (e) => {
-//   if (!isAnimating) {
-//     if (e.deltaY > 0) {
-//       customScroll('up');
-//     } else if (e.deltaY < 0) {
-//       customScroll('down');
-//     }
-//   }
-// });
-
-articles.forEach((article) => {
-  article.addEventListener("wheel", (e) => {
-    if (!isAnimating) {
-      if (e.deltaY > 0) {
-        customScroll('up');
-      } else if (e.deltaY < 0) {
-        customScroll('down');
-      }
-    }
-  });
-});
-
 let swipeDir,
   //startX,
   startY,
@@ -68,38 +46,60 @@ let swipeDir,
   elapsedTime,
   startTime;
 
-scrollable.addEventListener("touchstart", (e) => {
-  let touchObj = e.changedTouches[0];
-  swipeDir = 'none';
-  //distX = 0;
-  distY = 0;
-  //startX = touchObj.pageX;
-  startY = touchObj.pageY;
-  startTime = new Date().getTime();
-  // e.preventDefault();
-});
 
-scrollable.addEventListener("touchmove", (e) => {
-  e.preventDefault(); //prevent scrolling when inside DIV
-});
+// Add event listeners to articles
+articles.forEach((article) => {
 
-scrollable.addEventListener("touchend", (e) => {
-  var touchObj = e.changedTouches[0];
-  //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
-  distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
-  elapsedTime = new Date().getTime() - startTime; //get time elapsed
-  if (elapsedTime <= allowedTime) {
-    // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
-    //   swipeDir = (distX < 0) ? 'left': 'right'; 
-    // } else 
-    if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
-      swipeDir = (distY < 0) ? 'up' : 'down';
-      console.log('swipeDir');
+  article.addEventListener("wheel", (e) => {
+    if (!isAnimating) {
+      if (e.deltaY > 0) {
+        customScroll('up');
+      } else if (e.deltaY < 0) {
+        customScroll('down');
+      }
     }
-  }
-  // e.preventDefault();
-  console.log('touchend', swipeDir, distY);
-  customScroll(swipeDir);
+  });
+
+  article.addEventListener("touchstart", (e) => {
+    let touchObj = e.changedTouches[0];
+    swipeDir = 'none';
+    //distX = 0;
+    distY = 0;
+    //startX = touchObj.pageX;
+    startY = touchObj.pageY;
+    startTime = new Date().getTime();
+    // e.preventDefault();
+  });
+
+  article.addEventListener("touchmove", (e) => {
+    e.preventDefault(); //prevent scrolling when inside DIV
+  });
+  
+  article.addEventListener("touchend", (e) => {
+    var touchObj = e.changedTouches[0];
+    //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
+    distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
+    elapsedTime = new Date().getTime() - startTime; //get time elapsed
+    if (elapsedTime <= allowedTime) {
+      // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+      //   swipeDir = (distX < 0) ? 'left': 'right'; 
+      // } else 
+      if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
+        swipeDir = (distY < 0) ? 'up' : 'down';
+        console.log('swipeDir');
+      }
+    }
+    // e.preventDefault();
+    console.log('touchend', swipeDir, distY);
+    customScroll(swipeDir);
+  });
+
+  article.addEventListener("transitionend", () => {
+    setTimeout(() => {
+      console.log('ended')
+      isAnimating = false;
+    }, 500);
+  });
 });
 
 let toggleActive = () => {
@@ -132,17 +132,6 @@ let pageTransition = (dir, page) => {
   }
 }
 
-// Old transition
-// let pageTransition = (toReverse) => {
-//   animation_screens.forEach((screen) => {
-//     if (toReverse) {
-//       screen.classList.add('animate', 'reverse');
-//     } else {
-//       screen.classList.add('animate');
-//     }
-//   });
-// }
-
 let customScrollTo = (pos) => {
   isAnimating = true;
 
@@ -150,14 +139,13 @@ let customScrollTo = (pos) => {
     isAnimating = false;
     return;
   } else if (yPos > pos) {
-    pageTransition('up', pos/-100);
+    pageTransition('up', pos / -100);
   } else {
-    pageTransition('down', pos/-100);
+    pageTransition('down', pos / -100);
   }
 
   yPos = pos;
   toggleActive();
-  // scrollable.style.top = yPos + "vh";
 }
 
 let customScroll = (dir) => {
@@ -178,48 +166,12 @@ let customScroll = (dir) => {
     isAnimating = false;
     return;
   }
-  // pageTransition(isReverse);
-  // console.log(articles[yPos/-100]);
-  pageTransition(dir, yPos/-100);
+  pageTransition(dir, yPos / -100);
   toggleActive();
-  // scrollable.style.top = yPos + "vh";
 };
 
 articles.forEach((article) => {
-  article.addEventListener("transitionend", () => {
-    setTimeout(() => {
-      console.log('ended')
-      isAnimating = false;
-    }, 500);
-  });
 });
-
-// frame.addEventListener("animationend", () => {
-//   animation_screens.forEach((screen) => {
-//     screen.classList.remove('animate', 'reverse');
-//   })
-// })
-
-// let onReverseAnimationEnd = setTimeout(() => {
-//   document.querySelector('.reverse').classList.remove('animate', 'reverse');
-//   isAnimating = false;
-// }, 1500);
-
-// scrollable.addEventListener('animationend', () => {
-//   console.log('animateionend');
-
-//   // ON ANIMATIONEND NOT FIRED AFTER REVERSE;
-//   // articles[0].style.zIndex = -50;
-//   let reverse = document.querySelector('.reverse');
-//   console.log(document.querySelector('.reverse'));
-//   if (reverse) {
-//     reverse.classList.remove('animate', 'reverse');
-//   }
-
-//   setTimeout(() => {
-//     isAnimating = false;
-//   }, 500);
-// })
 
 // Form validation
 message.addEventListener("focusout", () => {
@@ -273,5 +225,3 @@ toggleTheme = () => {
   // body.classList.toggle('dark');
   return;
 }
-
-// TODO: scroll horizontally in mobile?
