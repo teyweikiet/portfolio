@@ -508,7 +508,7 @@ form h2 {
         margin: 1em 0.5em;
         display: initial;
         height: max(60vh, 250px);
-        max-height: 400px;
+        max-height: 250px;
     }
 
     .work-card img,
