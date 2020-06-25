@@ -421,10 +421,15 @@ form h2 {
 #message:focus~.floating-label,
 #message:not(:focus):not(.invalid)~.floating-label,
 .inputText:focus~.floating-label,
-.inputText:not(:focus):valid~.floating-label {
+.inputText:not(:focus):not(.empty)~.floating-label {
     top: calc(-1.5 * var(--input-padding));
     font-size: 0.8em;
     opacity: 0.8;
+}
+
+.invalid:not(.empty)~.floating-label,
+.invalid:not(.empty) {
+    color: red;
 }
 
 #send {

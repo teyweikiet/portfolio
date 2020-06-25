@@ -81,6 +81,8 @@ let onTransitionEnd = () => {
 };
 
 let onWheel = (e) => {
+  e.stopPropagation();
+
   if (!isAnimating) {
     if (e.deltaY > 0) {
       customScroll('up');
@@ -91,6 +93,8 @@ let onWheel = (e) => {
 };
 
 let onTouchStart = (e) => {
+  e.stopPropagation();
+
   let touchObj = e.changedTouches[0];
   swipeDir = 'none';
   //distX = 0;
@@ -102,10 +106,13 @@ let onTouchStart = (e) => {
 };
 
 let onTouchMove = (e) => {
+  e.stopPropagation();
   e.preventDefault(); //prevent scrolling when inside DIV
 };
 
 let onTouchEnd = (e) => {
+  e.stopPropagation();
+
   var touchObj = e.changedTouches[0];
   //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
   distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
@@ -258,13 +265,60 @@ let detachListenersFromArticles = () => {
 }
 
 // Form validation
+inputs[0].addEventListener("change", () => {
+  if (/^[a-zA-Z ]+$/.test(inputs[0].value)) {
+    inputs[0].classList.remove('invalid', 'empty');
+    // console.log('valid');
+  } else {
+    inputs[0].classList.add('invalid');
+    if (inputs[0].value == '') {
+      inputs[0].classList.add('empty');
+    } else {
+      inputs[0].classList.remove('empty');
+    };
+    // console.log('invalid');
+  }
+});
+
+inputs[1].addEventListener("change", () => {
+  if (/.+@.+\..+/.test(inputs[1].value)) {
+    inputs[1].classList.remove('invalid', 'empty');
+    // console.log('valid');
+  } else {
+    inputs[1].classList.add('invalid');
+
+    if (inputs[1].value == '') {
+      inputs[1].classList.add('empty');
+    } else {
+      inputs[1].classList.remove('empty');
+    };
+    // console.log('invalid');
+  }
+});
+
+inputs[2].addEventListener("change", () => {
+  if (/^\d{10,11}$/.test(inputs[2].value)) {
+    inputs[2].classList.remove('invalid', 'empty');
+    console.log('valid');
+  } else {
+    inputs[2].classList.add('invalid');
+    if (inputs[2].value == '') {
+      inputs[2].classList.add('empty')
+    } else {
+      inputs[2].classList.remove('empty')
+    };
+
+    console.log('invalid');
+  }
+});
+
 message.addEventListener("focusout", () => {
   if (message.innerHTML == '') {
-    message.classList.add('invalid');
-    // console.log('invalid');
+    message.classList.add('invalid', 'empty');
+    console.log('invalid');
   } else {
-    message.classList.remove('invalid');
-    // console.log('valid');
+    message.classList.remove('invalid', 'empty');
+    console.log('valid');
   }
 });
 
