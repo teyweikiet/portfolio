@@ -1,3 +1,5 @@
+//TODO: remove yPos, use counter
+
 let body = document.body,
   frame = document.querySelector("#frame"),
   navs = document.querySelectorAll('header nav li'),
@@ -7,7 +9,9 @@ let body = document.body,
   inputs = document.querySelectorAll('.inputText'),
   labels = document.querySelectorAll('.floating-label'),
   articles = document.querySelectorAll('article'),
-  yPos = -100,
+
+  // TODO:yPos = -100,
+
   // active page index
   counter = 0,
   isAnimating = false,
@@ -17,38 +21,40 @@ let parseStyle = (style) => {
   return style ? parseInt(style.match(/-?\d+/)) : 0;
 }
 
+let updateSpan = () => {
+  span.style.width = navs[counter].offsetWidth + 'px';
+  // span.style.left = navs[counter].offsetLeft + 'px';
+}
+
 setup = () => {
   body.classList.add('animation-stopper');
   isAnimating = true;
 
   clearTimeout(stopTimer);
 
-  // let c = parseStyle(scrollable.style.top) / -100,
-  //   current = navs[c];
   let current = navs[counter];
 
-  current.classList.toggle('active');
+  // counter++; //TODO:
 
-  span.style.width = navs[1].offsetWidth + 'px';
-  span.style.left = navs[yPos / -100].offsetLeft + 'px';
+  //TODO: current.classList.toggle('active');
 
-  // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches);
-  // console.log(window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
-  // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
-  // attachListenersToArticles();
+
+  //TODO: span.style.width = navs[1].offsetWidth + 'px';
+  //TODO: span.style.left = navs[yPos / -100].offsetLeft + 'px';
+  updateSpan(); //TODO:
+
   if (window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches) {
     body.classList.add('slideMode');
     attachListenersToArticles();
   } else {
     body.classList.remove('slideMode');
-    // console.log('removed');
     detachListenersFromArticles();
   }
 
+  // Disable scroll on #home
   articles[0].addEventListener('scroll', doNothing);
   articles[0].addEventListener('wheel', doNothing);
   articles[0].addEventListener('touchstart', doNothing);
-  // articles[0].addEventListener('touchend', doNothing);
 
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');
@@ -103,10 +109,10 @@ let onTouchStart = (e) => {
   // e.preventDefault();
 };
 
-let onTouchMove = (e) => {
-  e.stopPropagation();
-  e.preventDefault(); //prevent scrolling when inside DIV
-};
+// let onTouchMove = (e) => {
+//   e.stopPropagation();
+//   e.preventDefault(); //prevent scrolling when inside DIV
+// };
 
 let onTouchEnd = (e) => {
   e.stopPropagation();
@@ -133,20 +139,29 @@ frame.addEventListener('scroll', (e) => {
   console.log(frame.scrollTop);
 
   if (frame.scrollTop >= articles[3].offsetTop - 100) {
-    yPos = -300;
+    
+    //TODO: yPos = -300;
+    counter = 3;
+
     toggleActive();
   } else if (frame.scrollTop >= articles[2].offsetTop - 100) {
-    yPos = -200;
+    
+    //TODO: yPos = -200;
+    counter = 2;
+    
     toggleActive();
   } else {
-    yPos = -100;
+    
+    //TODO: yPos = -100;
+    counter = 1;
+
     toggleActive();
   }
 });
 
 let toggleActive = () => {
 
-  let c = yPos / -100,
+  let c = counter, //TODO: yPos / -100,
     current = navs[c];
 
   let active = document.querySelector('.active');
@@ -156,6 +171,7 @@ let toggleActive = () => {
   }
 
   span.style.left = `${current.offsetLeft}px`;
+
   current.classList.add('active');
 }
 
@@ -163,6 +179,7 @@ let pageTransition = (dir, page) => {
 
   if (dir == 'up') {
     while (counter < page) {
+      console.log(counter);
       articles[counter].style.top = `-100vh`;
       counter++;
     }
@@ -175,7 +192,9 @@ let pageTransition = (dir, page) => {
 }
 
 let ccustomScrollTo = (pos) => {
-  pageTransition('up', pos / -100);
+  counter = pos;
+  pageTransition('up', counter);
+  toggleActive;
 }
 
 let customScrollTo = (pos) => {
@@ -183,51 +202,79 @@ let customScrollTo = (pos) => {
 
   isAnimating = true;
 
-  if (yPos == pos) {
+  //TODO: if (yPos == pos) {
+  //   isAnimating = false;
+  //   return;
+  // } else if (yPos > pos) {
+  //   pageTransition('up', pos / -100);
+  // } else {
+  //   pageTransition('down', pos / -100);
+  // }
+
+  if (counter == pos) {
     isAnimating = false;
     return;
-  } else if (yPos > pos) {
-    pageTransition('up', pos / -100);
+  } else if (counter > pos) {
+    pageTransition('up', pos);
   } else {
-    pageTransition('down', pos / -100);
+    pageTransition('down', pos);
   }
+
+  //TODO: if (isSlideMode) {
+  //   if (yPos == pos) {
+  //     isAnimating = false;
+  //     return;
+  //   } else if (yPos > pos) {
+  //     pageTransition('up', pos / -100);
+  //   } else {
+  //     pageTransition('down', pos / -100);
+  //   }
+  // } else {
+  //   frame.scrollTo(0, articles[pos / -100].offsetTop);
+  // }
 
   if (isSlideMode) {
-    if (yPos == pos) {
+    if (counter == pos) {
       isAnimating = false;
       return;
-    } else if (yPos > pos) {
-      pageTransition('up', pos / -100);
+    } else if (counter > pos) {
+      pageTransition('up', pos);
     } else {
-      pageTransition('down', pos / -100);
+      pageTransition('down', pos);
     }
   } else {
-    frame.scrollTo(0, articles[pos / -100].offsetTop);
+    frame.scrollTo(0, articles[pos].offsetTop);
   }
 
-  yPos = pos;
+  counter = pos;
   toggleActive();
 }
 
 let customScroll = (dir) => {
   isAnimating = true;
 
+  //TODO: if (dir == 'up') {
+  //   yPos -= 100;
+  // } else if (dir == 'down') {
+  //   yPos += 100;
+  // }
+
   if (dir == 'up') {
-    yPos -= 100;
+    counter -= 1;
   } else if (dir == 'down') {
-    yPos += 100;
+    counter += 1;
   }
 
-  if (yPos < -300) {
-    yPos = -300;
+  if (counter > 3) {
+    counter = 3;
     isAnimating = false;
     return;
-  } else if (yPos > -100) {
-    yPos = -100;
+  } else if (counter < 1) {
+    counter = 1;
     isAnimating = false;
     return;
   }
-  pageTransition(dir, yPos / -100);
+  pageTransition(dir, counter);
   toggleActive();
 };
 
@@ -242,7 +289,7 @@ let attachListenersToArticles = () => {
     article.addEventListener("wheel", onWheel);
 
     article.addEventListener("touchstart", onTouchStart);
-    article.addEventListener("touchmove", onTouchMove);
+    article.addEventListener("touchmove", doNothing);
     article.addEventListener("touchend", onTouchEnd);
   });
 }
