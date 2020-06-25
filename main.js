@@ -298,6 +298,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
     inputs.forEach((input, index) => {
       if (index == 3) {
         input.innerHTML = '';
+        input.classList.add('invalid');
       } else {
         input.value = '';
       }
