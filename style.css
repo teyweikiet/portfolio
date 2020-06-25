@@ -29,7 +29,6 @@
     margin: 0;
     padding: 0;
     font-family: var(--font-sans);
-    /* z-index: 1; */
 }
 
 h1, h2, h3 {font-family: var(--font-serif);}
@@ -82,7 +81,6 @@ article {
     box-sizing: border-box;
     padding-bottom: var(--header-height);
     top: 0vh;
-
     background: var(--clr-light);
     position: absolute;
     transition: top var(--transition-duration) ease-out;
@@ -96,9 +94,6 @@ article {
 
 #scrollable {
     position: relative;
-    /* top: 0vh; */
-    /* transition: top var(--transition-duration) ease-in-out; */
-
     width: 100vw;
     height: 100vh;
 }
@@ -191,8 +186,6 @@ header nav span {
     background: var(--clr-light);
     text-align: left;
     z-index: 5;
-
-    /* transition: all 2s ease-in-out; */
 }
 
 #home .wrap-content {
@@ -277,7 +270,6 @@ header nav span {
 .profile-div {
     width: 100%;
     margin: 50px 0;
-    /* display: inline-block; */
 }
 
 .profile-div > * {
@@ -371,8 +363,6 @@ form>div>* {
     top: calc(1 * var(--input-padding));
 }
 
-/* #message ~ .floating-label {top: calc(0.8 * var(--input-padding));} */
-
 #message:focus~.floating-label,
 #message:not(:focus):not(.invalid)~.floating-label,
 .inputText:focus~.floating-label,
@@ -381,11 +371,6 @@ form>div>* {
     font-size: 0.8em;
     opacity: 0.8;
 }
-
-/* #message:focus~.floating-label,
-#message:not(:focus):not(.invalid)~.floating-label {
-    top: calc(-1.2 * var(--input-padding));
-} */
 
 #send {
     box-sizing: border-box;
@@ -398,48 +383,6 @@ form>div>* {
     box-shadow: 2px 2px 2px var(--clr-shadow);
     margin-top: 1em;
 }
-
-/* transition effect */
-.animation-screen {
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 5;
-    position: absolute;
-    left: -110vw;
-}
-
-/* .animate {
-    animation: slideOver 1.2s;
-} */
-
-/* .animate:nth-child(4) {
-    background: rgba(33, 41, 48, 0.7);
-    z-index: 6;
-    animation-delay: 0.15s;
-}
-
-.animate:nth-child(5) {
-    background: rgba(65, 75, 86, 0.6);
-    z-index: 7;
-    animation-delay: 0.3s;
-}
-
-.animate:nth-child(6) {
-    background: rgba(96, 106, 116, 0.6);
-    z-index: 8;
-    animation-delay: 0.45s;
-}
-
-@keyframes slideOver {
-    0% {
-        left: -110vw;
-    }
-
-    100% {
-        left: 100vw;
-    }
-} */
 
 /* mediaquery */
 @media (min-width: 600px) {
@@ -542,8 +485,6 @@ form>div>* {
     .profile-img {
         border-radius: 0px;
     }
-
-    /* #social-media {width: 400px;} */
 
     /* contact */
     #contact .wrap-content {
