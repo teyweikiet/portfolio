@@ -23,8 +23,6 @@ setup = () => {
 
   clearTimeout(stopTimer);
 
-  // let c = parseStyle(scrollable.style.top) / -100,
-  //   current = navs[c];
   let current = navs[counter];
 
   current.classList.toggle('active');
@@ -32,23 +30,17 @@ setup = () => {
   span.style.width = navs[1].offsetWidth + 'px';
   span.style.left = navs[yPos / -100].offsetLeft + 'px';
 
-  // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches);
-  // console.log(window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
-  // console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
-  // attachListenersToArticles();
-  if (window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches) {
-    body.classList.add('slideMode');
-    attachListenersToArticles();
-  } else {
-    body.classList.remove('slideMode');
-    // console.log('removed');
-    detachListenersFromArticles();
-  }
+  // if (window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches) {
+  //   body.classList.add('slideMode');
+  //   attachListenersToArticles();
+  // } else {
+  //   body.classList.remove('slideMode');
+  //   detachListenersFromArticles();
+  // }
 
   articles[0].addEventListener('scroll', doNothing);
   articles[0].addEventListener('wheel', doNothing);
   articles[0].addEventListener('touchstart', doNothing);
-  // articles[0].addEventListener('touchend', doNothing);
 
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');
@@ -72,62 +64,62 @@ let doNothing = (e) => {
   e.preventDefault();
 }
 
-let onTransitionEnd = () => {
-  setTimeout(() => {
-    isAnimating = false;
-  }, 500);
-};
+// let onTransitionEnd = () => {
+//   setTimeout(() => {
+//     isAnimating = false;
+//   }, 500);
+// };
 
-let onWheel = (e) => {
-  e.stopPropagation();
+// let onWheel = (e) => {
+//   e.stopPropagation();
 
-  if (!isAnimating) {
-    if (e.deltaY > 0) {
-      customScroll('up');
-    } else if (e.deltaY < 0) {
-      customScroll('down');
-    }
-  }
-};
+//   if (!isAnimating) {
+//     if (e.deltaY > 0) {
+//       customScroll('up');
+//     } else if (e.deltaY < 0) {
+//       customScroll('down');
+//     }
+//   }
+// };
 
-let onTouchStart = (e) => {
-  e.stopPropagation();
+// let onTouchStart = (e) => {
+//   e.stopPropagation();
 
-  let touchObj = e.changedTouches[0];
-  swipeDir = 'none';
-  //distX = 0;
-  distY = 0;
-  //startX = touchObj.pageX;
-  startY = touchObj.pageY;
-  startTime = new Date().getTime();
-  // e.preventDefault();
-};
+//   let touchObj = e.changedTouches[0];
+//   swipeDir = 'none';
+//   //distX = 0;
+//   distY = 0;
+//   //startX = touchObj.pageX;
+//   startY = touchObj.pageY;
+//   startTime = new Date().getTime();
+//   // e.preventDefault();
+// };
 
-let onTouchMove = (e) => {
-  e.stopPropagation();
-  e.preventDefault(); //prevent scrolling when inside DIV
-};
+// let onTouchMove = (e) => {
+//   e.stopPropagation();
+//   e.preventDefault(); //prevent scrolling when inside DIV
+// };
 
-let onTouchEnd = (e) => {
-  e.stopPropagation();
+// let onTouchEnd = (e) => {
+//   e.stopPropagation();
 
-  var touchObj = e.changedTouches[0];
-  //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
-  distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
-  elapsedTime = new Date().getTime() - startTime; //get time elapsed
-  if (elapsedTime <= allowedTime) {
-    // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
-    //   swipeDir = (distX < 0) ? 'left': 'right'; 
-    // } else 
-    if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
-      swipeDir = (distY < 0) ? 'up' : 'down';
-      console.log('swipeDir');
-    }
-  }
-  // e.preventDefault();
-  console.log('touchend', swipeDir, distY);
-  customScroll(swipeDir);
-};
+//   var touchObj = e.changedTouches[0];
+//   //distX = touchObj.pageX - startX; // get horizontal dist traveled by finger while in contact
+//   distY = touchObj.pageY - startY; // get vertical dist traveled by finger while in contact
+//   elapsedTime = new Date().getTime() - startTime; //get time elapsed
+//   if (elapsedTime <= allowedTime) {
+//     // if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+//     //   swipeDir = (distX < 0) ? 'left': 'right'; 
+//     // } else 
+//     if (Math.abs(distY) >= threshold) { // && Math.abs(distX) <= restraint) {
+//       swipeDir = (distY < 0) ? 'up' : 'down';
+//       console.log('swipeDir');
+//     }
+//   }
+//   // e.preventDefault();
+//   console.log('touchend', swipeDir, distY);
+//   customScroll(swipeDir);
+// };
 
 frame.addEventListener('scroll', (e) => {
   console.log(frame.scrollTop);
@@ -232,35 +224,35 @@ let customScroll = (dir) => {
 };
 
 // Add event listeners to articles
-let attachListenersToArticles = () => {
-  articles.forEach((article, index) => {
+// let attachListenersToArticles = () => {
+//   articles.forEach((article, index) => {
 
-    article.addEventListener("transitionend", onTransitionEnd);
+//     article.addEventListener("transitionend", onTransitionEnd);
 
-    if (index == 0) return;
+//     if (index == 0) return;
 
-    article.addEventListener("wheel", onWheel);
+//     article.addEventListener("wheel", onWheel);
 
-    article.addEventListener("touchstart", onTouchStart);
-    article.addEventListener("touchmove", onTouchMove);
-    article.addEventListener("touchend", onTouchEnd);
-  });
-}
+//     article.addEventListener("touchstart", onTouchStart);
+//     article.addEventListener("touchmove", onTouchMove);
+//     article.addEventListener("touchend", onTouchEnd);
+//   });
+// }
 
-let detachListenersFromArticles = () => {
-  articles.forEach((article, index) => {
+// let detachListenersFromArticles = () => {
+//   articles.forEach((article, index) => {
 
-    article.removeEventListener("transitionend", onTransitionEnd);
+//     article.removeEventListener("transitionend", onTransitionEnd);
 
-    if (index == 0) return;
+//     if (index == 0) return;
 
-    article.removeEventListener("wheel", onWheel);
+//     article.removeEventListener("wheel", onWheel);
 
-    article.removeEventListener("touchstart", onTouchStart);
-    article.removeEventListener("touchmove", onTouchMove);
-    article.removeEventListener("touchend", onTouchEnd);
-  });
-}
+//     article.removeEventListener("touchstart", onTouchStart);
+//     article.removeEventListener("touchmove", onTouchMove);
+//     article.removeEventListener("touchend", onTouchEnd);
+//   });
+// }
 
 // Form validation
 inputs[0].addEventListener("change", () => {
@@ -388,9 +380,3 @@ stopTyping = (node_index) => {
 }
 
 startTyping(0);
-
-// Toggle theme
-toggleTheme = () => {
-  // body.classList.toggle('dark');
-  return;
-}

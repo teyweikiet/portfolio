@@ -53,20 +53,20 @@ a:hover {
     cursor: pointer;
 }
 
-.slideMode img {
+/* .slideMode img {
     max-width: 100%;
     max-height: calc(100vh - 2 * var(--header-height));
     margin: auto;
-}
+} */
 
 i {
     font-size: 1.5em
 }
 
-.slideMode .wrap-content {
+/* .slideMode .wrap-content {
     max-height: 100vh !important;
     max-height: calc(100vh - 2 * var(--header-height));
-}
+} */
 
 .wrap-content {
     max-width: 900px;
@@ -86,21 +86,22 @@ article {
     transition: top var(--transition-duration) ease-out;
 }
 
-.slideMode article {
+/* .slideMode article {
     position: absolute;
     height: 100vh !important;
     padding-bottom: var(--header-height);
-}
+} */
 
 #frame {
     height: 100vh;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    transition: var(--transition-duration);
 }
 
-.slideMode #frame {
+/* .slideMode #frame {
     overflow: hidden;
-}
+} */
 
 #scrollable {
     position: relative;
@@ -314,10 +315,10 @@ header nav span {
     margin: 0.2em;
 }
 
-.slideMode .profile-img {
+/* .slideMode .profile-img {
     max-height: min(300px, 50vh);
     height: 60vw;
-}
+} */
 
 .profile-img {
     width: 60vw;
@@ -446,9 +447,9 @@ form h2 {
 
 /* mediaquery */
 @media only screen and (min-width: 500px) {
-    .slideMode article {
+    /* .slideMode article {
         padding-top: var(--header-height);
-    }
+    } */
 
     /* @media header */
     header {
@@ -564,62 +565,6 @@ form h2 {
         padding: 2em;
     }
 
-}
-
-/* @media (max-width: 500px) and (max-aspect-ratio: 2) {
-    #scrollable, article {
-        position: initial !important;
-    }
-
-    #scrollable {
-        overflow: initial;
-    }
-} */
-
-/* dark theme */
-.dark {
-    background: var(--clr-dark);
-    color: var(--clr-light);
-}
-
-.dark .bars {
-    background: var(--clr-light);
-}
-
-.dark #frame>*:nth-child(odd) {
-    background: var(--clr-dark)
-}
-
-.dark a {
-    color: var(--clr-light);
-}
-
-.dark .change ul {
-    background: var(--clr-dark);
-}
-
-.dark input,
-textarea {
-    border-bottom-color: var(--clr-light);
-    color: var(--clr-light)
-}
-
-.form-control:focus {
-    border-color: var(--clr-light);
-    box-shadow: none;
-}
-
-.dark .horizontal-line {
-    background: var(--clr-light);
-}
-
-.dark #send {
-    background-color: var(--clr-dark);
-    border-color: var(--clr-light);
-}
-
-.dark header span {
-    background: var(--clr-light);
 }
 
 /* stop animation */
