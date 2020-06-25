@@ -85,7 +85,7 @@ article {
 
     background: var(--clr-light);
     position: absolute;
-    transition: top var(--transition-duration) ease-in-out;
+    transition: top var(--transition-duration) ease-out;
 }
 
 #frame {

@@ -9,7 +9,7 @@ let body = document.body,
   articles = document.querySelectorAll('article'),
   yPos = 0,
   counter = 0;
-  isAnimating = false;
+isAnimating = false;
 
 let stopTimer;
 
@@ -117,13 +117,17 @@ let toggleActive = () => {
   current.classList.add('active');
 }
 
-let pageTransition = (dir) => {
+let pageTransition = (dir, page) => {
   console.log('pag', counter)
   if (dir == 'up') {
-    articles[counter].style.top = `-100vh`;
-    counter++;
+    while (counter < page) {
+      articles[counter].style.top = `-100vh`;
+      counter++;
+    }
   } else if (dir == 'down') {
-    articles[--counter].style.top = `0vh`;
+    while (counter > page) {
+      articles[--counter].style.top = `0vh`;
+    }
     // c--;       
   }
 }
@@ -146,9 +150,9 @@ let customScrollTo = (pos) => {
     isAnimating = false;
     return;
   } else if (yPos > pos) {
-    pageTransition(false);
+    pageTransition('up', pos/-100);
   } else {
-    pageTransition(true);
+    pageTransition('down', pos/-100);
   }
 
   yPos = pos;
@@ -176,7 +180,7 @@ let customScroll = (dir) => {
   }
   // pageTransition(isReverse);
   // console.log(articles[yPos/-100]);
-  pageTransition(dir);
+  pageTransition(dir, yPos/-100);
   toggleActive();
   // scrollable.style.top = yPos + "vh";
 };
