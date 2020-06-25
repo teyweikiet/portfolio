@@ -11,7 +11,7 @@ let body = document.body,
   // active page index
 
   counter = 0;
-  isAnimating = false;
+isAnimating = false;
 
 let stopTimer;
 
@@ -34,7 +34,18 @@ setup = () => {
   span.style.width = navs[1].offsetWidth + 'px';
   span.style.left = navs[1].offsetLeft + 'px';
 
-  attachListenersToArticles();
+  console.log(window.matchMedia('(min-width: 500px) and (min-height: 450px)').matches);
+  console.log(window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
+  console.log(window.matchMedia('(min-width: 500px) and(min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches);
+  // attachListenersToArticles();
+  if (window.matchMedia('(min-width: 500px) and(min-height: 450px)').matches || window.matchMedia('(max-width: 500px) and (min-height: 600px)').matches) {
+    body.classList.add('slideMode');
+    attachListenersToArticles();
+  } else {
+    body.classList.remove('slideMode');
+    console.log('removed');
+    detachListenersFromArticles();
+  }
 
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');
@@ -56,7 +67,6 @@ let swipeDir,
 // Event listeneer functions 
 let onTransitionEnd = () => {
   setTimeout(() => {
-    console.log('ended')
     isAnimating = false;
   }, 500);
 };
@@ -121,7 +131,7 @@ let toggleActive = () => {
 }
 
 let pageTransition = (dir, page) => {
-  console.log('pag', counter)
+
   if (dir == 'up') {
     while (counter < page) {
       articles[counter].style.top = `-100vh`;
@@ -178,11 +188,11 @@ let attachListenersToArticles = () => {
   articles.forEach((article, index) => {
 
     article.addEventListener("transitionend", onTransitionEnd);
-    
+
     if (index == 0) return;
-  
+
     article.addEventListener("wheel", onWheel);
-  
+
     article.addEventListener("touchstart", onTouchStart);
     article.addEventListener("touchmove", onTouchMove);
     article.addEventListener("touchend", onTouchEnd);
@@ -193,11 +203,11 @@ let detachListenersFromArticles = () => {
   articles.forEach((article, index) => {
 
     article.removeEventListener("transitionend", onTransitionEnd);
-    
+
     if (index == 0) return;
-  
+
     article.removeEventListener("wheel", onWheel);
-  
+
     article.removeEventListener("touchstart", onTouchStart);
     article.removeEventListener("touchmove", onTouchMove);
     article.removeEventListener("touchend", onTouchEnd);
