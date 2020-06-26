@@ -257,9 +257,10 @@ document.querySelector('form').addEventListener('submit', (e) => {
     inputs.forEach((input, index) => {
       if (index == 3) {
         input.innerHTML = '';
-        input.classList.add('invalid');
+        input.classList.add('invalid', 'empty');
       } else {
         input.value = '';
+        input.classList.add('invalid', 'empty');
       }
     })
   });

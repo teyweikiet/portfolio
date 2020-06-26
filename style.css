@@ -434,7 +434,7 @@ a:hover, a > i:hover {
 /* contact */
 #contact {
     height: 100vh;
-    max-height: ;
+    /* max-height: ; */
     z-index: 1;
     padding: var(--header-height) 0;
     margin: var(--header-height) 0;
