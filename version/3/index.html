@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet"
+        crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <link href="style.css" rel="stylesheet">
+    <script defer src="main.js"></script>
+    <title>Portfolio</title>
+</head>
+
+<body onload="setup()" onresize="setup()">
+    <div id="frame">
+        <header>
+            <div class="wrap-content">
+                <p id="logo" onclick="toggleTheme()">&lt;/&gt; TWK</p>
+                <nav>
+                    <ul>
+                        <li onclick="customScrollTo(0)">
+                            <i class="fas fa-home"></i>
+                            <p>Home</p>
+                        </li>
+                        <li onclick="customScrollTo(-100)">
+                            <i class="fas fa-briefcase"></i>
+                            <p>Work</p>
+                        </li>
+                        <li onclick="customScrollTo(-200)">
+                            <i class="fas fa-user-tie"></i>
+                            <p>About</p>
+                        </li>
+                        <li onclick="customScrollTo(-300)">
+                            <i class="fas fa-address-card"></i>
+                            <p>Contact</p>
+                        </li>
+                        <span></span>
+                    </ul>
+                    
+                </nav>
+            </div>
+        </header>
+        <div id="scrollable">
+            <article id="home">
+                <div class="wrap-content">
+                    <p>Welcome to</p>
+                    <h1>My Portfolio</h1>
+                    <div class="horizontal-line"></div>
+                </div>
+            </article>
+            <article id="work">
+
+                <div class="wrap-content">
+                    <h2>Work</h2>
+                    <div class="work-card">
+                        <img src="images/undraw_online_cv_qy9w.svg">
+                        <div class="work-card-text">
+                            <div class="work-card-text-main">
+                                <h3>Dose Calculator</h3>
+                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app" target="_blank"><i
+                                        class="fas fa-link"></i></a>
+                            </div>
+                            <p>An android app built with flutter.</p>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <img src="images/undraw_online_cv_qy9w.svg">
+                        <div class="work-card-text">
+                            <div class="work-card-text-main">
+                                <h3>Markdown Previewer</h3>
+                                <a href="https://com-ak15t-dose-calculator.en.aptoide.com/app" target="_blank"><i
+                                        class="fas fa-link"></i></a>
+                            </div>
+                            <p>A web app that let you preview markdown.</p>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <img src="images/undraw_online_cv_qy9w.svg">
+                        <div class="work-card-text">
+                            <div class="work-card-text-main">
+                                <h3>Data Visualization Collection</h3>
+                                <a href="https://codepen.io/tv/DEEaGN" target="_blank"><i class="fas fa-link"></i></a>
+                            </div>
+                            <p>Data visualization with D3.js.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+
+            <article id="about">
+                <div class="wrap-content">
+                    <h2>About</h2>
+                    <div class="profile-div">
+                        <img class="profile-img" src="images/pic001.jpg"></img>
+                        <div id="profile-text">
+                            <p class="name">Tey Wei Kiet</p>
+                            <p class="position">BPharm (Hons), RPh</p>
+                            <p class="description">Software engineer at Invoke Malaysia</p>
+
+                            <ul id="social-media">
+                                <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i>
+                                        <p>LinkedIn</p>
+                                    </a></li>
+                                <li><a href="https://dev.to" target="_blank"><i class="fab fa-dev"></i>
+                                        <p>Dev.to</p>
+                                    </a></li>
+                                <li><a href="https://github.com" target='_blank'><i class="fab fa-github"></i>
+                                        <p>Github</p>
+                                    </a></li>
+                                <li><a href="https://codepen.io" target="_blank"><i class="fab fa-codepen"></i>
+                                        <p>Codepen</p>
+                                    </a></li>
+                                <li><a href="https://freecodecamp.com" target="_blank"><i class="fab fa-free-code-camp"></i>
+                                        <p>freeCodeCamp</p>
+                                    </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article id="contact">
+                <div class="wrap-content">
+                    <form>
+                        <h2>Get in touch!</h2>
+                        <div>Hi, my name is
+                            <div class="custom-input">
+                                <input type="name" class="inputText" required />
+                                <span class="floating-label">your name</span>
+                            </div>
+                            and I can be reached via
+                            <div class="custom-input">
+                                <input type="email" class="inputText" required />
+                                <span class="floating-label">your email</span>
+                            </div></input>
+                            and
+                            <div class="custom-input">
+                                <input type="tel" class="inputText" required />
+                                <span class="floating-label">your phone name</span>
+                            </div>
+                            so that we can discuss about
+                            <div class="custom-input custom-input-expandable">
+                                <div id="message" onwheel="event.stopPropagation()" ontouch role="text"
+                                    contenteditable="true" class="inputText invalid" aria-required="true"></div>
+                                <span class="floating-label">your message</span>
+                            </div>
+                            <br>
+                            <input id="send" type="submit" value="Send"></input>
+                        </div>
+                    </form>
+
+                    
+                </div>
+            </article>
+        </div>
+
+        <div class="animation-screen"></div>
+        <div class="animation-screen"></div>
+        <div class="animation-screen"></div>
+        <div class="animation-screen"></div>
+    </div>
+</body>
+
+</html>

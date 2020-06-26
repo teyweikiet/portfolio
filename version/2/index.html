@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Corben&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <script defer src="main.js"></script>
+    <title>Portfolio</title>
+</head>
+
+<body>
+    <div id="frame">
+        <header>
+            <div class="wrap-content">
+                <nav>
+                    <h1 id="logo" onclick="toggleTheme()">Logo</h1>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i>
+                                <p>Home</p>
+                            </a></li>
+                        <li><a href="#work"><i class="fas fa-briefcase"></i>
+                                <p>Work</p>
+                            </a></li>
+                        <li><a href="#about"><i class="fas fa-user-tie"></i>
+                                <p>About</p>
+                            </a></li>
+                        <li><a href="#contact"><i class="fas fa-address-card"></i>
+                                <p>Contact</p>
+                            </a></li>
+                    </ul>
+
+                    <!-- <div id="menu" onclick="toggleMenu(this)">
+                        <div class="bars" id="bar1"></div>
+                        <div class="bars" id="bar2"></div>
+                        <div class="bars" id="bar3"></div>
+                    </div> -->
+                </nav>
+            </div>
+        </header>
+        <div id="scrollable">
+            <article id="home">
+                <div class="wrap-content">
+                    <h1>Welcome to my portfolio</h1>
+                </div>
+            </article>
+            <article id="work">
+                <div class="wrap-content">
+                    <img src="images/undraw_online_cv_qy9w.svg">
+                </div>
+            </article>
+
+            <article id="about">
+                <div class="wrap-content">
+                    <img src="images/undraw_about_me_wa29.svg">
+                </div>
+            </article>
+
+            <article id="contact">
+                <div class="wrap-content">
+                    <img src="images/undraw_contact_us_15o2.svg">
+                    
+                    <form>
+                        <h2>Get In Touch!</h2>
+                        <input type="name" placeholder="Your Name" @required>
+                        <input type="email" placeholder="Your Email" @required>
+                        <textarea>Your Message</textarea>
+                        <input type="submit" value="Send Email">
+                    </form>
+
+                    <ul id="social-media">
+                        <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i>
+                                <p>LinkedIn</p>
+                            </a></li>
+                        <li><a href="https://dev.to" target="_blank"><i class="fab fa-dev"></i>
+                                <p>Dev.to</p>
+                            </a></li>
+                        <li><a href="https://github.com" target='_blank'><i class="fab fa-github"></i>
+                                <p>Github</p>
+                            </a></li>
+                        <li><a href="https://codepen.io" target="_blank"><i class="fab fa-codepen"></i>
+                                <p>Codepen</p>
+                            </a></li>
+                        <li><a href="https://freecodecamp.com" target="_blank"><i class="fab fa-free-code-camp"></i>
+                                <p>freeCodeCamp</p>
+                            </a></li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+        <!-- <footer>
+            <div class="wrap-content">
+                <ul id="footer-nav">
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <p>Built by Tey Wei Kiet</p>
+            </div>
+        </footer> -->
+    </div>
+</body>
+
+</html>
