@@ -7,6 +7,7 @@ let body = document.body,
   inputs = document.querySelectorAll('.inputText'),
   labels = document.querySelectorAll('.floating-label'),
   articles = document.querySelectorAll('article'),
+  work_cards = document.querySelectorAll('.work-card'),
   yPos = -100,
   // active page index
   counter = 0,
@@ -15,6 +16,13 @@ let body = document.body,
 
 let parseStyle = (style) => {
   return style ? parseInt(style.match(/-?\d+/)) : 0;
+}
+
+let clearSelected = () => {
+  let selected = document.querySelector('.selected');
+  if (selected) {
+    selected.classList.remove('selected');
+  }
 }
 
 setup = () => {
@@ -33,6 +41,9 @@ setup = () => {
   articles[0].addEventListener('scroll', doNothing);
   articles[0].addEventListener('wheel', doNothing);
   articles[0].addEventListener('touchstart', doNothing);
+
+  // clearSelected();
+  // work_cards[1].classList.add('selected');
 
   stopTimer = setTimeout(() => {
     body.classList.remove('animation-stopper');

@@ -329,6 +329,11 @@ header nav span {
     transform: scale(1.05);
 }
 
+.work-card.selected {
+    z-index: 10;
+    transform: scale(1.05);
+}
+
 .work-card img {
     width: 100%;
     height: 40%;
