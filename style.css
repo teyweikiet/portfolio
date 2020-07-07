@@ -594,6 +594,14 @@ form h2 {
     }  
 
     /* about */
+    #about {
+        padding-top: var(--header-height);
+    }
+    
+    #about h2 {
+        padding-bottom: 1.5em;
+    }
+    
     .profile-div {
         display: flex;
     }
