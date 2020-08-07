@@ -227,19 +227,6 @@ message.addEventListener("focusout", () => {
   }
 });
 
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyB2DxpX1mDgU5WvpP67ZOD4gdrHLC9MsCw",
-  authDomain: "portfolio-8b8a6.firebaseapp.com",
-  databaseURL: "https://portfolio-8b8a6.firebaseio.com",
-  projectId: "portfolio-8b8a6",
-  storageBucket: "portfolio-8b8a6.appspot.com",
-  messagingSenderId: "780151023748",
-  appId: "1:780151023748:web:4d7a16d40c1f63081efad1"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
 document.querySelector('form').addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -247,24 +234,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
     console.log('invalid');
     return;
   }
-
-  firebase.database().ref().child('message').push({
-    name: inputs[0].value,
-    email: inputs[1].value,
-    phone: inputs[2].value,
-    message: inputs[3].innerHTML,
-  }, () => {
-    inputs.forEach((input, index) => {
-      if (index == 3) {
-        input.innerHTML = '';
-        input.classList.add('invalid', 'empty');
-      } else {
-        input.value = '';
-        input.classList.add('invalid', 'empty');
-      }
-    })
-  });
-
 
 });
 
